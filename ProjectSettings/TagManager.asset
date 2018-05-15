@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - wall
+  - goal
+  - checkpoint
+  - moveOn
+  - turnLeft
+  - turnRight
+  - backOn
+  - action
+  - floar
+  - Obstacle
+  - ifPanel
+  - dog
+  - whilePanel
+  - downBrack
+  - whileHit
+  - ifHit
+  - dog2
+  - checkpoint1
+  - checkpoint2
+  - checkpoint3
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - 
+  - Floar
+  - Player
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
