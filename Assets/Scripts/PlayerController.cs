@@ -84,9 +84,11 @@ public class PlayerController : MonoBehaviour
 
         floarController = GameObject.Find("floar").GetComponent<floorController>();
 
+        /*
         seList = GetComponents<AudioSource>();
         ashioto = seList[0];
         awa = seList[1];
+        */
 
         ifCheckFlg = false;
 

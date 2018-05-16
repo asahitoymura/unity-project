@@ -10,7 +10,10 @@ public class panelController : MonoBehaviour
     private List<GameObject> ifPanelList;
     private List<GameObject> ifActionPanelList;
     private IDictionary<string, List<GameObject>> ifActionMap;
+    private GameObject edit;
+    private GameObject edit_2;
 
+    private float centerPos;
 
     // Use this for initialization
     void Start()
@@ -20,6 +23,11 @@ public class panelController : MonoBehaviour
         ifPanelList = new List<GameObject>();
         ifActionPanelList = new List<GameObject>();
         ifActionMap = new Dictionary<string, List<GameObject>>();
+
+        edit = GameObject.Find("edit");
+        edit_2 = GameObject.Find("edit_2");
+
+        centerPos = (edit.transform.position.x + edit_2.transform.position.x) / 2;
 
     }
 
@@ -104,7 +112,7 @@ public class panelController : MonoBehaviour
             }
 
             // エディットフィールドの左側を最初に実行する
-            if (tmpCube.transform.position.x < 7.0F)
+            if (tmpCube.transform.position.x < centerPos)
             {
                 int index = 0;
                 foreach (GameObject tmpObj in tmpList)
