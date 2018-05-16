@@ -1599,6 +1599,11 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1511614396}
+--- !u!1 &1512054942 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1078777437110904, guid: f247aaa2212768248882d47a163d545a,
+    type: 2}
+  m_PrefabInternal: {fileID: 968660941}
 --- !u!1001 &1572431498
 Prefab:
   m_ObjectHideFlags: 0
@@ -1803,6 +1808,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9eb02013f7fac1e4ca9adc997980ba18, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1720888646 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1249782015455456, guid: 41c5984b0b50e22408817f17c729d350,
+    type: 2}
+  m_PrefabInternal: {fileID: 571488838}
 --- !u!1 &1741354825
 GameObject:
   m_ObjectHideFlags: 0
@@ -1920,8 +1930,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 716366cc6d6c5da4f90586e33cbe09db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseUI: {fileID: 0}
-  Obstacle: {fileID: 0}
+  pauseUI: {fileID: 1720888646}
+  Obstacle: {fileID: 1512054942}
   goalUI: {fileID: 2051051859}
 --- !u!65 &1766199699
 BoxCollider:

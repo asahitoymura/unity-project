@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Result : MonoBehaviour
-{
+public class Result : MonoBehaviour{
 
     private string[] comm;
     private int[] number;
@@ -20,8 +19,7 @@ public class Result : MonoBehaviour
     private GameObject end;
 
     // Use this for initialization
-    void Start()
-    {
+    void Start(){
         comm = new string[1024];
         number = new int[1024];
         LoadCSV.csvload();
@@ -35,20 +33,16 @@ public class Result : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
 
     }
 
-    public void load()
-    {
+    public void load(){
         count += LoadCSV.getI();
-        while (!(c[count] == null))
-        {
+        while (!(c[count] == null)){
             string a = c[count];
             string[] values = a.Split(',');
-            if (values[0].Equals("moveOn"))
-            {
+            if (values[0].Equals("moveOn")){
                 comm[count] = "まえにすすむ";
                 GameObject prefab = (GameObject)Resources.Load(values[0]);
                 Vector3 postion = new Vector3(x: -8.5F + posX, y: 4.5F - posY, z: 0);
@@ -63,9 +57,7 @@ public class Result : MonoBehaviour
                     posY = 0;
                     x = 0;
                 }
-            }
-            else if (values[0].Equals("turnRight"))
-            {
+            } else if (values[0].Equals("turnRight")){
                 comm[count] = "みぎにむく";
                 GameObject prefab = (GameObject)Resources.Load(values[0]);
                 Vector3 postion = new Vector3(x: -8.5F + posX, y: 4.5F - posY, z: 0);
@@ -75,15 +67,12 @@ public class Result : MonoBehaviour
                 Instantiate(yazirusi, yazipos, Quaternion.identity);
                 posY += 1.0f + 1.0f;
                 x++;
-                if (x >= 5)
-                {
+                if (x >= 5){
                     posX += 1.5f + 0.15f;
                     posY = 0;
                     x = 0;
                 }
-            }
-            else if (values[0].Equals("turnLeft"))
-            {
+            } else if (values[0].Equals("turnLeft")){
                 comm[count] = "ひだりにむく";
                 GameObject prefab = (GameObject)Resources.Load(values[0]);
                 Vector3 postion = new Vector3(x: -8.5F + posX, y: 4.5F - posY, z: 0);
@@ -93,15 +82,12 @@ public class Result : MonoBehaviour
                 Instantiate(yazirusi, yazipos, Quaternion.identity);
                 posY += 1.0f + 1.0f;
                 x++;
-                if (x >= 5)
-                {
+                if (x >= 5){
                     posX += 1.5f + 0.15f;
                     posY = 0;
                     x = 0;
                 }
-            }
-            else if (values[0].Equals("buckOn"))
-            {
+            } else if (values[0].Equals("buckOn")){
                 comm[count] = "うしろにすすむ";
                 GameObject prefab = (GameObject)Resources.Load(values[0]);
                 Vector3 postion = new Vector3(x: -8.5F + posX, y: 4.5F - posY, z: 0);
@@ -111,19 +97,14 @@ public class Result : MonoBehaviour
                 Instantiate(yazirusi, yazipos, Quaternion.identity);
                 posY += 1.0f + 1.0f;
                 x++;
-                if (x >= 5)
-                {
+                if (x >= 5){
                     posX += 1.5f + 0.15f;
                     posY = 0;
                     x = 0;
                 }
-            }
-            else if (values[0].Equals("Goal"))
-            {
+            } else if (values[0].Equals("Goal")){
                 comm[count] = "ゴール";
-            }
-            else if (values[0].Equals("Miss"))
-            {
+            } else if (values[0].Equals("Miss")){
                 comm[count] = "ミス";
             }
             number[count] = int.Parse(values[1]);

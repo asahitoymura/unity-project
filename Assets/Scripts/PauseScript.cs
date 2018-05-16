@@ -2,8 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class PauseScript : MonoBehaviour
-{
+public class PauseScript : MonoBehaviour{
 
     PlayerController playerController;
 
@@ -13,8 +12,7 @@ public class PauseScript : MonoBehaviour
     public GameObject Obstacle;
     public GameObject goalUI;
 
-    private void Start()
-    {
+    private void Start(){
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
@@ -42,33 +40,23 @@ public class PauseScript : MonoBehaviour
         }
     }
     
-    public void OnTriggerEnter(Collider other)
-    {
-        
-        if (other.gameObject.tag == "wall")
-        {
+    public void OnTriggerEnter(Collider other){
+        if (other.gameObject.tag == "wall"){
             Obstacle.SetActive(!Obstacle.activeSelf);
-            if (Obstacle.activeSelf)
-            {
+            if (Obstacle.activeSelf){
                 Time.timeScale = 0f;
-            }
-            else
-            {
+            } else {
                 Time.timeScale = 1f;
             }
         }
     }
 
-    public void dispCheckPoint()
-    {
+    public void dispCheckPoint(){
         pauseUI.SetActive(!pauseUI.activeSelf);
         playerController.ChangeMoveFlg();
-        if (pauseUI.activeSelf)
-        {
+        if (pauseUI.activeSelf){
             Time.timeScale = 0f;
-        }
-        else
-        {
+        } else {
             Time.timeScale = 1f;
         }
     }
@@ -78,12 +66,9 @@ public class PauseScript : MonoBehaviour
         panelObj.GetComponent<Image>().sprite = sprite;
         
         goalUI.SetActive(!goalUI.activeSelf);
-        if (goalUI.activeSelf)
-        {
+        if (goalUI.activeSelf){
             Time.timeScale = 0f;
-        }
-        else
-        {
+        } else {
             Time.timeScale = 1f;
         }
     }

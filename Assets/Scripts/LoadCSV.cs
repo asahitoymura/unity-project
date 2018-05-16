@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public class LoadCSV : MonoBehaviour
-{
+public class LoadCSV : MonoBehaviour{
 
     public static string filePass;
     private static string[] command;
@@ -17,21 +16,18 @@ public class LoadCSV : MonoBehaviour
     private static int icount = 0;
 
     // Use this for initialization
-    void Start()
-    {
+    void Start(){
         command = new string[1024];
         num = new int[1024];
         //csvload();
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
 
     }
 
-    public static void csvload()
-    {
+    public static void csvload(){
         //int i = 0;
         //csv = Resources.Load("CSV/" + name) as TextAsset;
         //while (flag){
@@ -53,15 +49,11 @@ public class LoadCSV : MonoBehaviour
         //}
 
         csv = Resources.Load(filePass + name) as TextAsset;
-        if (csv == null)
-        {
+        if (csv == null){
 
-        }
-        else
-        {
+        } else {
             StringReader reader = new StringReader(csv.text);
-            while (reader.Peek() > -1)
-            {
+            while (reader.Peek() > -1){
                 string line = reader.ReadLine();
                 string[] values = line.Split(','); //csvでは,でコマンド(命令)と回数を区切っているので,を境に分ける
                 command[i] = values[0];
@@ -72,19 +64,15 @@ public class LoadCSV : MonoBehaviour
         }
     }
 
-    IEnumerator wait(float n)
-    {
+    IEnumerator wait(float n){
         yield return new WaitForSeconds(n);
-
     }
 
-    public static int getI()
-    {
+    public static int getI(){
         return i;
     }
 
-    public static int getIcount()
-    {
+    public static int getIcount(){
         return icount;
     }
 }

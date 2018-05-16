@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public class CSVWriter : MonoBehaviour
-{
+public class CSVWriter : MonoBehaviour{
 
     public string filepathname;
     //InputManager input;
@@ -13,22 +12,18 @@ public class CSVWriter : MonoBehaviour
     private int num = 0;
 
     // Use this for initialization
-    void Start()
-    {
+    void Start(){
         com = new string[1024];
         LoadCSV.csvload();
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
 
     }
 
-    public void WriteCSV(string txt)
-    {
-        if (LoadCSV.getI() > 0)
-        {
+    public void WriteCSV(string txt){
+        if (LoadCSV.getI() > 0){
             StreamWriter streamWriter;
             FileInfo fileInfo;
             fileInfo = new FileInfo(filepathname + "/" + LoadCSV.getIcount().ToString() + "/" + name + ".csv");
@@ -38,9 +33,7 @@ public class CSVWriter : MonoBehaviour
             num++;
             streamWriter.Flush();
             streamWriter.Close();
-        }
-        else
-        {
+        } else {
             StreamWriter streamWriter;
             FileInfo fileInfo;
             fileInfo = new FileInfo(filepathname + "/" + "0/" + name + ".csv");
@@ -53,8 +46,7 @@ public class CSVWriter : MonoBehaviour
         }
     }
 
-    public static string[] getCom()
-    {
+    public static string[] getCom(){
         return com;
     }
 }

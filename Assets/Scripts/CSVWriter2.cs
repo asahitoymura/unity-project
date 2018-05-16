@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public class CSVWriter2 : MonoBehaviour
-{
+public class CSVWriter2 : MonoBehaviour{
 
     public string filepathname;
     //InputManager input;
@@ -12,21 +11,18 @@ public class CSVWriter2 : MonoBehaviour
     
 
     // Use this for initialization
-    void Start()
-    {
+    void Start(){
         //input = GameObject.Find("InputField").GetComponent<InputManager>();
         //        Directory.CreateDirectory("C:/Users/atoyomura/p/edupgm2/test_Data/Resources/CSV/0");
         Directory.CreateDirectory(filepathname);
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
 
     }
 
-    public void WriteCSV(string txt)
-    {
+    public void WriteCSV(string txt){
         StreamWriter streamWriter;
         FileInfo fileInfo;
         fileInfo = new FileInfo(filepathname+"/" + name + ".csv");

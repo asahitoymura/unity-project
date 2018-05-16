@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class floorController : MonoBehaviour
-{
+public class floorController : MonoBehaviour{
     Renderer MainSpriteRenderer;
     Renderer ParentRenderer;
 
@@ -33,11 +32,9 @@ public class floorController : MonoBehaviour
     //        Debug.Log("Change the Renderer");
     //    }
 
-    public void ChangeMaterial(GameObject oya)
-    {
+    public void ChangeMaterial(GameObject oya){
         ParentRenderer = oya.GetComponent<Renderer>();
         ParentRenderer.material = Passed;
-
     }
 
     public void ResetMaterial(){

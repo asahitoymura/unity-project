@@ -16,11 +16,9 @@ public class dustbox : MonoBehaviour {
 		
 	}
 
-    void OnTriggerEnter(Collider other)
-    {
+    void OnTriggerEnter(Collider other){
         panelController.DeletePanel(other.gameObject);
         Destroy(other.gameObject);
 
     }
-
 }
