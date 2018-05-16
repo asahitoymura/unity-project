@@ -53,6 +53,11 @@ public class panelController : MonoBehaviour
 
     }
 
+    public void DeletePanelList(GameObject obj)
+    {
+        panelList.Remove(obj);
+    }
+
     public List<GameObject> GetPanelList()
     {
         SortPanel();
@@ -99,7 +104,7 @@ public class panelController : MonoBehaviour
             }
 
             // エディットフィールドの左側を最初に実行する
-            if (tmpCube.transform.position.x < 6.0F)
+            if (tmpCube.transform.position.x < 7.0F)
             {
                 int index = 0;
                 foreach (GameObject tmpObj in tmpList)
@@ -153,24 +158,4 @@ public class panelController : MonoBehaviour
         }
 
     }
-
-    public void contactPanelSort(GameObject obj)
-    {
-        SortPanel();
-        int panelIndex = panelList.IndexOf(obj);
-        int index = 0;
-        Vector3 objScal = obj.transform.localScale;
-        foreach (GameObject tmpObj in panelList)
-        {
-            button buttoncs = tmpObj.GetComponent<button>();
-            bool contactFlg = buttoncs.GetContactFlg();
-            if (index > panelIndex && contactFlg)
-            {
-                Vector3 tmpPos = new Vector3(tmpObj.transform.position.x, tmpObj.transform.position.y + objScal.y, tmpObj.transform.position.z);
-                tmpObj.transform.position = tmpPos;
-            }
-            index++;
-        }
-    }
-
 }

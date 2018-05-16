@@ -137,6 +137,19 @@ public class button : MonoBehaviour
 
         if (transform.tag == "whilePanel" || transform.tag == "ifPanel")
         {
+            if (Physics.Raycast(zRay, out zHit, -1.0F))
+            {
+                GameObject hitObj = zHit.collider.gameObject;
+                if (hitObj.tag != "ifPanel" && hitObj.tag != "whilePanel")
+                {
+                    hitObj.transform.parent = transform;
+                    if(transform.tag == "whilePanel")
+                    {
+                        transform.GetComponent<button>().AddWhilePanel(hitObj.transform.gameObject);
+                        panelController.DeletePanelList(hitObj.transform.gameObject);
+                    }
+                }
+            }
             return;
         }
 
@@ -151,6 +164,7 @@ public class button : MonoBehaviour
             {
                 transform.parent = hitObj.transform;
                 hitObj.GetComponent<button>().AddWhilePanel(transform.gameObject);
+                panelController.DeletePanelList(transform.gameObject);
             }
         }
 
@@ -202,8 +216,6 @@ public class button : MonoBehaviour
                 hitObj.transform.parent = transform;
             }
         }
-
-        //        panelController.contactPanelSort(transform.gameObject);
 
     }
 

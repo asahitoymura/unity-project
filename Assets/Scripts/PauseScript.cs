@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PauseScript : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class PauseScript : MonoBehaviour
     [SerializeField]
     public GameObject pauseUI;
     public GameObject Obstacle;
+    public GameObject goalUI;
 
     private void Start()
     {
@@ -26,6 +28,7 @@ public class PauseScript : MonoBehaviour
                 pauseUI.SetActive(false);
                 Time.timeScale = 1f;
                 playerController.SetIfCheckFlg();
+                playerController.ChangeMoveFlg();
             }
         }
         else if (Obstacle.activeSelf)
@@ -34,6 +37,15 @@ public class PauseScript : MonoBehaviour
             {
                 Obstacle.SetActive(false);
                 Time.timeScale = 1f;
+                playerController.ChangeMoveFlg();
+            }
+        } else if (goalUI.activeSelf)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                goalUI.SetActive(false);
+                Time.timeScale = 1f;
+                playerController.ChangeMoveFlg();
             }
         }
     }
@@ -41,14 +53,6 @@ public class PauseScript : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         
-        if(other.gameObject.tag == "checkpoint"){
-            pauseUI.SetActive(!pauseUI.activeSelf);
-            if (pauseUI.activeSelf){
-                Time.timeScale = 0f;
-            }else{
-                Time.timeScale = 1f;
-            }
-        }else 
         if (other.gameObject.tag == "wall")
         {
             Obstacle.SetActive(!Obstacle.activeSelf);
@@ -66,6 +70,7 @@ public class PauseScript : MonoBehaviour
     public void dispCheckPoint()
     {
         pauseUI.SetActive(!pauseUI.activeSelf);
+        playerController.ChangeMoveFlg();
         if (pauseUI.activeSelf)
         {
             Time.timeScale = 0f;
@@ -76,4 +81,19 @@ public class PauseScript : MonoBehaviour
         }
     }
 
+    public void DispGoal(Sprite sprite)
+    {
+        GameObject panelObj = goalUI.transform.Find("Panel").gameObject;
+        panelObj.GetComponent<Image>().sprite = sprite;
+        
+        goalUI.SetActive(!goalUI.activeSelf);
+        if (goalUI.activeSelf)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
+    }
 }

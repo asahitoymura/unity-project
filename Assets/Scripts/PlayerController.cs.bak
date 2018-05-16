@@ -1,12 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
 
-	private floorController floarController;
+    private floorController floarController;
+
+    private AudioSource[] seList;
+    private AudioSource ashioto;
+    private AudioSource awa;
+
+
     private const string FRONT = "front";
     private const string RIGHT = "right";
     private const string LEFT = "left";
@@ -16,6 +22,7 @@ public class PlayerController : MonoBehaviour {
     private GameObject player;
     private GameObject miss;
     private GameObject goal;
+    private GameObject talk;
     Vector3 pos;
     Vector3 defaultPos;
     Vector3 defaultRot;
@@ -36,8 +43,31 @@ public class PlayerController : MonoBehaviour {
 
     private panelController panelController;
 
+    private bool buttonFreezFlg;
+
+    private bool ifCheckFlg;
+
+    private PauseScript pauseScript;
+    private bool moveFlg;
+    private int panelIndex;
+
+    private List<GameObject> panelList;
+    IDictionary<string, List<GameObject>> ifActionMap;
+    private float moveCount;
+    private const float maxMove = 2.0F;
+    private const float maxMove2 = 1.5F;
+    private List<GameObject> whilePanelList;
+    private int whileCount;
+    private int whileIndex;
+    private bool stage3check1;
+    private bool stage3check2;
+    private bool stage3check3;
+    private string stage;
+    private GameObject goalobj;
+
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         player = GameObject.Find("Player");
         pos = GetComponent<Transform>().position;
         defaultPos = player.transform.position;
@@ -51,107 +81,142 @@ public class PlayerController : MonoBehaviour {
 
         CSV = GameObject.Find("CSVWriter").GetComponent<CSVWriter>();  //GameObject CSVWriterを探し出してアタッチする
         panelController = GameObject.Find("edit").GetComponent<panelController>();
-        
+
         floarController = GameObject.Find("floar").GetComponent<floorController>();
-    }
-	
-	// Update is called once per frame
-	void Update () {
-	}
 
-    public void createPanel(string tag)
-    {
+        seList = GetComponents<AudioSource>();
+        ashioto = seList[0];
+        awa = seList[1];
 
-            float posY = 0F;
-            float posX = 0F;
-            if (clickCount < 10)
-            {
-                posY = clickCount * 0.5F;
-                posX = clickCountX * 1.5F;
-            }
-            else
-            {
-                clickCount = 0;
-                clickCountX++;
-                posY = clickCount;
-                posX = clickCountX * 1.5F;
+        ifCheckFlg = false;
 
-            }
+        pauseScript = player.GetComponent<PauseScript>();
 
-            GameObject prefab = (GameObject)Resources.Load(tag);
-            Vector3 postion = new Vector3(x: 3.6F + posX, y: 4.0F - posY, z: 0);
-            moveObjList.Add(Instantiate(prefab, postion, rotation: Quaternion.identity));
-            clickCount++;
-            moveList.Add(tag);
+        moveFlg = false;
+
+        panelList = new List<GameObject>();
+        whilePanelList = new List<GameObject>();
+        ifActionMap = null;
+        panelIndex = 0;
+        moveCount = 0F;
+        whileCount = 0;
+        whileIndex = 0;
     }
 
-
-    public void moveStart()
+    // Update is called once per frame
+    void Update()
     {
+        if (moveFlg)
+        {
+            //   IDictionary<string, List<GameObject>> ifActionMap = panelController.GetIfActionMap();
+
+
+            if (ifActionMap != null && ifCheckFlg)
+            {
+                List<GameObject> ifActionObjList = ifActionMap["ifPanel"];
+                MoveCommand(ifActionObjList[0]);
+            }else 
+            if (panelList.Count > panelIndex)
+            {
+                GameObject tmpObj = panelList[panelIndex];
+                MoveCommand(tmpObj);
+            } else
+            {
+                moveFlg = false;
+                buttonFreezFlg = false;
+            }
+        }
+    }
+
+    public void MoveStart()
+    {
+        if (buttonFreezFlg)
+        {
+            return;
+        }
         float timeCount = 1F;
         foreach (string moveCommand in moveList)
         {
-
-            StartCoroutine(sleep(moveCommand, timeCount));
             CSV.WriteCSV(moveCommand + "," + commandcount);
             commandcount++;
             timeCount++;
         }
-        timeCount = 0F;
-        clickCount = 0;
-        clickCountX = 0;
-        moveList.Clear();
-        player.transform.position = defaultPos;
-        player.transform.localEulerAngles = defaultRot;
-        count = 0;
-        checkpointflag = false;
-        meDirection = BACK;
-        this.GetComponent<Renderer>().material = backmaterial;
-        Destroy(miss);
-        Destroy(goal);
-
-
-
-        List<GameObject> panelList = panelController.GetPanelList();
-        foreach (GameObject tmpObj in panelList)
-        {
-            StartCoroutine(sleep(tmpObj.tag, timeCount));
-            timeCount++;
-        }
-
-        timeCount = 0F;
+        StatusReset();
     }
 
-    private void move()
+    private void Move()
     {
-        
+//        ashioto.Play();
         Quaternion q = this.transform.rotation;
         float moveZ = q.eulerAngles.z;
-        if (count > 0 && moveZ == 0f){
+        if (count > 0 && moveZ == 0f)
+        {
             pos = transform.position;
-            pos.y += 1.5f + 0.5f;
-            player.transform.position = pos;
-            count++;
-        }else if (count <= 0 &&  moveZ == 0f){
+            pos.y += 0.05F;
+            transform.position = pos;
+            moveCount += 0.05F;
+            if(moveCount > maxMove)
+            {
+                panelIndex++;
+                moveCount = 0F;
+                count++;
+            }
+        }
+        else if (count <= 0 && moveZ == 0f)
+        {
             pos = transform.position;
-            pos.y += 1.5f;
-            player.transform.position = pos;
-            count++;
-        }else if (count > 0 && moveZ == 90f || moveZ == -270f){
+            pos.y += 0.05F;
+            transform.position = pos;
+            moveCount += 0.05F;
+
+            if (moveCount > maxMove2)
+            {
+                panelIndex++;
+                moveCount = 0F;
+                count++;
+            }
+        }
+        else if (count > 0 && moveZ == 90f || moveZ == -270f)
+        {
             pos = transform.position;
-            pos.x += 1.5f + 0.5f;
-            player.transform.position = pos;
-            count++;
-        }else if (count > 0 && moveZ == 180f || moveZ == -180f){
+            pos.x += 0.05F;
+            transform.position = pos;
+            moveCount += 0.05F;
+
+            if (moveCount > maxMove)
+            {
+                panelIndex++;
+                moveCount = 0F;
+                count++;
+            }
+        }
+        else if (count > 0 && moveZ == 180f || moveZ == -180f)
+        {
             pos = transform.position;
-            pos.y -= 1.5f + 0.5f;
-            player.transform.position = pos;
-            count++;
-        }else if (count > 0 && moveZ == 270f|| moveZ == -90f){
+            pos.y -= 0.05F;
+            transform.position = pos;
+            moveCount += 0.05F;
+
+            if (moveCount > maxMove)
+            {
+                panelIndex++;
+                moveCount = 0F;
+                count++;
+            }
+        }
+        else if (count > 0 && moveZ == 270f || moveZ == -90f)
+        {
             pos = transform.position;
-            pos.x -= 1.5f + 0.5f;
-            player.transform.position = pos;
-            count++;
+            pos.x -= 0.05F;
+            transform.position = pos;
+            moveCount += 0.05F;
+
+            if (moveCount > maxMove)
+            {
+                panelIndex++;
+                moveCount = 0F;
+                count++;
+            }
         }
     }
 
@@ -163,94 +228,144 @@ public class PlayerController : MonoBehaviour {
         if (count > 0 && backZ == 0f)
         {
             pos = transform.position;
-            pos.y -= 1.5f + 0.5f;
-            player.transform.position = pos;
-            count++;
+            pos.y -= 0.1F;
+            transform.position = pos;
+            moveCount += 0.1F;
+            if (moveCount > maxMove)
+            {
+                panelIndex++;
+                moveCount = 0F;
+                count++;
+            }
         }
         else if (count <= 0 && backZ == 0f)
         {
             pos = transform.position;
-            pos.y -= 1.5f;
-            player.transform.position = pos;
-            count++;
+            pos.y -= 0.1F;
+            transform.position = pos;
+            moveCount += 0.1F;
+
+            if (moveCount > maxMove2)
+            {
+                panelIndex++;
+                moveCount = 0F;
+                count++;
+            }
         }
         else if (count > 0 && backZ == 90f || backZ == -270f)
         {
             pos = transform.position;
-            pos.x -= 1.5f + 0.5f;
-            player.transform.position = pos;
-            count++;
+            pos.x -= 0.1F;
+            transform.position = pos;
+            moveCount += 0.1F;
+
+            if (moveCount > maxMove)
+            {
+                panelIndex++;
+                moveCount = 0F;
+                count++;
+            }
         }
         else if (count > 0 && backZ == 180f || backZ == -180f)
         {
             pos = transform.position;
-            pos.y += 1.5f + 0.5f;
-            player.transform.position = pos;
-            count++;
+            pos.y += 0.1F;
+            transform.position = pos;
+            moveCount += 0.1F;
+
+            if (moveCount > maxMove)
+            {
+                panelIndex++;
+                moveCount = 0F;
+                count++;
+            }
         }
         else if (count > 0 && backZ == 270f || backZ == -90f)
         {
             pos = transform.position;
-            pos.x += 1.5f + 0.5f;
-            player.transform.position = pos;
-            count++;
+            pos.x += 0.1F;
+            transform.position = pos;
+            moveCount += 0.1F;
+
+            if (moveCount > maxMove)
+            {
+                panelIndex++;
+                moveCount = 0F;
+                count++;
+            }
         }
     }
 
-    private void Right(){
-        transform.Rotate(new Vector3(0, 0, 90));
-        switch (meDirection)
-        {
-            case FRONT:
-                this.GetComponent<Renderer>().material = leftmaterial;
-                meDirection = LEFT;
-                break;
-            case RIGHT:
-                this.GetComponent<Renderer>().material = frontmaterial;
-                meDirection = FRONT;
-                break;
-            case LEFT:
-                this.GetComponent<Renderer>().material = backmaterial;
-                meDirection = BACK;
-                break;
-            case BACK:
-                this.GetComponent<Renderer>().material = rightmaterial;
-                meDirection = RIGHT;
-                break;
-        }
-
-    }
-
-    private void Left(){
-        transform.Rotate(new Vector3(0, 0, -90));
-        switch (meDirection)
-        {
-            case FRONT:
-                this.GetComponent<Renderer>().material = rightmaterial;
-                meDirection = RIGHT;
-                break;
-            case RIGHT:
-                this.GetComponent<Renderer>().material = backmaterial;
-                meDirection =BACK;
-                break;
-            case LEFT:
-                this.GetComponent<Renderer>().material =frontmaterial;
-                meDirection = FRONT;
-                break;
-            case BACK:
-                this.GetComponent<Renderer>().material = leftmaterial;
-                meDirection = LEFT;
-                break;
-        }
-    }
-
-    IEnumerator sleep(string moveCommand,float timeCount)
+    private void Right()
     {
-        yield return new WaitForSeconds(timeCount);
+        moveCount += 0.1F;
+
+        if (moveCount > maxMove)
+        {
+            moveCount = 0F;
+            transform.Rotate(new Vector3(0, 0, 90));
+            panelIndex++;
+            switch (meDirection)
+            {
+                case FRONT:
+                    this.GetComponent<Renderer>().material = leftmaterial;
+                    meDirection = LEFT;
+                    break;
+                case RIGHT:
+                    this.GetComponent<Renderer>().material = frontmaterial;
+                    meDirection = FRONT;
+                    break;
+                case LEFT:
+                    this.GetComponent<Renderer>().material = backmaterial;
+                    meDirection = BACK;
+                    break;
+                case BACK:
+                    this.GetComponent<Renderer>().material = rightmaterial;
+                    meDirection = RIGHT;
+                    break;
+            }
+        }
+
+    }
+
+    private void Left()
+    {
+        moveCount += 0.1F;
+
+        if (moveCount > maxMove)
+        {
+            panelIndex++;
+            moveCount = 0F;
+            transform.Rotate(new Vector3(0, 0, -90));
+            switch (meDirection)
+            {
+                case FRONT:
+                    this.GetComponent<Renderer>().material = rightmaterial;
+                    meDirection = RIGHT;
+                    break;
+                case RIGHT:
+                    this.GetComponent<Renderer>().material = backmaterial;
+                    meDirection = BACK;
+                    break;
+                case LEFT:
+                    this.GetComponent<Renderer>().material = frontmaterial;
+                    meDirection = FRONT;
+                    break;
+                case BACK:
+                    this.GetComponent<Renderer>().material = leftmaterial;
+                    meDirection = LEFT;
+                    break;
+            }
+        }
+    }
+
+    private void MoveCommand(GameObject panelObj)
+    {
+        string moveCommand = panelObj.tag;
         switch (moveCommand)
         {
             case "moveOn":
-                move();
+                Move();
                 break;
 
             case "turnRight":
@@ -268,22 +383,38 @@ public class PlayerController : MonoBehaviour {
             case "action":
                 Action();
                 break;
+
+            case "whilePanel":
+                WhileAction(panelObj);
+                break;
+
+            default:
+                panelIndex++;
+                break;
         }
+
     }
 
     private void Action()
     {
-        if (checkpointflag)
+        if (!checkpointflag)
         {
-            Debug.Log("お使い");
-        }
-        else
-        {
-            Debug.Log("だれもいないよ");
+            pauseScript.dispCheckPoint();
+            checkpointflag = true;
         }
     }
 
-    public void Reset()
+    public void SceneReset()
+    {
+        if (buttonFreezFlg)
+        {
+            return;
+        }
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void StatusReset()
     {
         clickCount = 0;
         clickCountX = 0;
@@ -292,20 +423,19 @@ public class PlayerController : MonoBehaviour {
         player.transform.localEulerAngles = defaultRot;
         count = 0;
         checkpointflag = false;
-
-        foreach (GameObject obj in moveObjList)
-        {
-            Destroy(obj);
-        }
-        moveObjList.Clear();
-
         meDirection = BACK;
         this.GetComponent<Renderer>().material = backmaterial;
-
         Destroy(miss);
         Destroy(goal);
 
-        panelController.ResetPanelList();
+        buttonFreezFlg = true;
+
+        moveFlg = true;
+        panelIndex = 0;
+        panelList = panelController.GetPanelList();
+        ifActionMap = panelController.GetIfActionMap();
+
+        floarController.ResetMaterial();
     }
 
     void OnTriggerEnter(Collider other)
@@ -314,44 +444,131 @@ public class PlayerController : MonoBehaviour {
         {
             if (checkpointflag)
             {
+                /*
                 goal = (GameObject)Resources.Load("clear");
                 Vector3 postion = new Vector3(x: -5.5F, y: 0F, z: -5F);
                 goal = Instantiate(goal, postion, Quaternion.identity);
-                StartCoroutine(WaiTtime(3));
+                */
+                pauseScript.DispGoal();
+                StartCoroutine(WaiTtime(2));
             }
             else
             {
-                miss = (GameObject)Resources.Load("miss");
+                miss = (GameObject)Resources.Load("through");
                 Vector3 postion = new Vector3(x: -5.5F, y: 0F, z: -5F);
                 miss = Instantiate(miss, postion, Quaternion.identity);
             }
         }
-        if (other.gameObject.tag == "wall")
-        {
+
+        if (other.gameObject.tag == "checkpoint" && !checkpointflag && stage =="stage1" || stage =="stage2"){
+            checkpointflag = true;
+            //goalobj = (GameObject)Resources.Load("goal");
+            //Vector3 goalpos = new Vector3(-8.45f, -6.5f, -2f);
+            //goalobj = Instantiate(goalobj, goalpos, Quaternion.identity);
+
+        }else if(other.gameObject.tag == "checkpoint1" && !checkpointflag && stage == "stage3"){
+            stage3check1 = true;
+            Debug.Log("checkpoint1 : true");
+
+        } else if (other.gameObject.tag == "checkpoint2" && !checkpointflag && stage == "stage3"){
+            stage3check2 = true;
+            Debug.Log("checkpoint2 : true");
+
+        } else if (other.gameObject.tag == "checkpoint3" && !checkpointflag && stage == "stage3"){
+            stage3check3 = true;
+            Debug.Log("checkpoint3 : true");
+        }
+
+        if(stage3check1 && stage3check2 && stage3check3){
+            checkpointflag = true;
+            goalobj = (GameObject)Resources.Load("goal");
+            Vector3 goalpos = new Vector3(-8.45f, -6.5f, -2f);
+            goalobj = Instantiate(goalobj, goalpos, Quaternion.identity);
+        }
+        
+        if (other.gameObject.tag == "wall"){
+            //awa.PlayOneShot(awa.clip);
             miss = (GameObject)Resources.Load("miss");
             Vector3 postion = new Vector3(x: -5.5F, y: 0F, z: -5F);
             miss = Instantiate(miss, postion, Quaternion.identity);
-        }
+         }
 
-        if (other.gameObject.tag == "checkpoint")
+        if (other.tag == "floar")
         {
-            checkpointflag = true;
+            floarController.ChangeMaterial(other.transform.parent.gameObject);
         }
+        //        if (other.gameObject.tag == "wall")
+        //        {
+        //            awa.PlayOneShot(awa.clip);
+        //            miss = (GameObject)Resources.Load("miss");
+        //            Vector3 postion = new Vector3(x: -5.5F, y: 0F, z: -5F);
+        //            miss = Instantiate(miss, postion, Quaternion.identity);
+        //        }
+
+        //        if (other.gameObject.tag == "checkpoint")
+        //        {
+        //            checkpointflag = true;
+        //
+        //            Debug.Log("talkを表示するよ");
+        //            talk = (GameObject)Resources.Load("talk");
+        //            Vector3 postion = new Vector3(x: -5.5F, y: 0F, z: -5F);
+        //            talk = Instantiate(talk, postion, Quaternion.identity);
+        //            Debug.Log("talkを表示したよ");
+        //        }
     }
+
     IEnumerator WaiTtime(int num)
     {
         yield return new WaitForSeconds(num);
         commandcount = 1;
         SceneManager.LoadScene(nextScenename);
     }
-    public void OnTriggerExit(Collider other)
+
+    void OnTriggerExit(Collider other)
     {
-        if(other.gameObject.tag == "floar")
+        if (other.gameObject.tag == "checkpoint")
         {
-            Debug.Log("into OnTriggerExit");
-            GameObject oya = other.transform.parent.gameObject;
-            floarController.changeMaterial(oya);
-            Debug.Log("Material has changed");
+            ifCheckFlg = false;
+        }
+    }
+
+    public void SetIfCheckFlg()
+    {
+        ifCheckFlg = false;
+    }
+
+
+    private void WhileAction(GameObject panelObj)
+    {
+        button whileButtonCs = panelObj.GetComponent<button>();
+        List<GameObject> whilePanelList = whileButtonCs.GetWhilePanelList();
+        if (whilePanelList == null)
+        {
+            panelIndex++;
+            return;
+        }
+        int whileCountMax = whileButtonCs.GetWhileCount();
+
+        if(whileCountMax > whileCount)
+        {
+            if (whilePanelList.Count > whileIndex)
+            {
+                GameObject whilePanel = whilePanelList[whileIndex];
+                MoveCommand(whilePanel);
+                if (moveCount == 0)
+                {
+                    whileIndex++;
+                    panelIndex--;
+                }
+            } else
+            {
+                whileIndex = 0;
+                whileCount++;
+            }
+        } else
+        {
+            whileCount = 0;
+            panelIndex++;
         }
     }
 }

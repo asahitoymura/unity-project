@@ -3,17 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerController : MonoBehaviour{
-    
+public class PlayerController : MonoBehaviour
+{
+
     private floorController floarController;
+
     private AudioSource[] seList;
     private AudioSource ashioto;
     private AudioSource awa;
+
+    public Sprite goalSprite;
+    public Sprite throwSprite;
+
+
     private const string FRONT = "front";
     private const string RIGHT = "right";
     private const string LEFT = "left";
     private const string BACK = "back";
     private string meDirection;//プレイヤーの向き
+
     private GameObject player;
     private GameObject miss;
     private GameObject goal;
@@ -22,24 +30,29 @@ public class PlayerController : MonoBehaviour{
     Vector3 defaultPos;
     Vector3 defaultRot;
     private int count;
-    private int clickCount;
-    private int clickCountX;
+
     private List<string> moveList;
     List<GameObject> moveObjList;
     private bool checkpointflag;
     private int commandcount = 1;
+
     public Material rightmaterial;
     public Material leftmaterial;
     public Material frontmaterial;
     public Material backmaterial;
     public string nextScenename;
     private CSVWriter CSV;  //CSVWriterクラスを読み込み
+
     private panelController panelController;
+
     private bool buttonFreezFlg;
+
     private bool ifCheckFlg;
+
     private PauseScript pauseScript;
     private bool moveFlg;
     private int panelIndex;
+
     private List<GameObject> panelList;
     IDictionary<string, List<GameObject>> ifActionMap;
     private float moveCount;
@@ -55,26 +68,32 @@ public class PlayerController : MonoBehaviour{
     private GameObject goalobj;
 
     // Use this for initialization
-    void Start(){
+    void Start()
+    {
         player = GameObject.Find("Player");
         pos = GetComponent<Transform>().position;
         defaultPos = player.transform.position;
         defaultRot = player.transform.localEulerAngles;
-        clickCount = 0;
-        clickCountX = 0;
         checkpointflag = false;
         meDirection = BACK;
         moveObjList = new List<GameObject>();
         moveList = new List<string>();
+
         CSV = GameObject.Find("CSVWriter").GetComponent<CSVWriter>();  //GameObject CSVWriterを探し出してアタッチする
         panelController = GameObject.Find("edit").GetComponent<panelController>();
+
         floarController = GameObject.Find("floar").GetComponent<floorController>();
+
         seList = GetComponents<AudioSource>();
-        //ashioto = seList[0];
-        //awa = seList[1];
+        ashioto = seList[0];
+        awa = seList[1];
+
         ifCheckFlg = false;
+
         pauseScript = player.GetComponent<PauseScript>();
+
         moveFlg = false;
+
         panelList = new List<GameObject>();
         whilePanelList = new List<GameObject>();
         ifActionMap = null;
@@ -82,31 +101,43 @@ public class PlayerController : MonoBehaviour{
         moveCount = 0F;
         whileCount = 0;
         whileIndex = 0;
+        stage = SceneManager.GetActiveScene().name;
     }
 
     // Update is called once per frame
-    void Update(){
-        if (moveFlg){
+    void Update()
+    {
+        if (moveFlg)
+        {
             //   IDictionary<string, List<GameObject>> ifActionMap = panelController.GetIfActionMap();
-            if (ifActionMap != null && ifCheckFlg){
+
+
+            if (ifActionMap != null && ifCheckFlg)
+            {
                 List<GameObject> ifActionObjList = ifActionMap["ifPanel"];
                 MoveCommand(ifActionObjList[0]);
-            }else if (panelList.Count > panelIndex){
+            }else 
+            if (panelList.Count > panelIndex)
+            {
                 GameObject tmpObj = panelList[panelIndex];
                 MoveCommand(tmpObj);
-            } else {
+            } else
+            {
                 moveFlg = false;
                 buttonFreezFlg = false;
             }
         }
     }
 
-    public void MoveStart(){
-        if (buttonFreezFlg){
+    public void MoveStart()
+    {
+        if (buttonFreezFlg)
+        {
             return;
         }
         float timeCount = 1F;
-        foreach (string moveCommand in moveList){
+        foreach (string moveCommand in moveList)
+        {
             CSV.WriteCSV(moveCommand + "," + commandcount);
             commandcount++;
             timeCount++;
@@ -114,56 +145,75 @@ public class PlayerController : MonoBehaviour{
         StatusReset();
     }
 
-    private void Move(){
+    private void Move()
+    {
 //        ashioto.Play();
         Quaternion q = this.transform.rotation;
         float moveZ = q.eulerAngles.z;
-        if (count > 0 && moveZ == 0f){
+        if (count > 0 && moveZ == 0f)
+        {
             pos = transform.position;
             pos.y += 0.05F;
             transform.position = pos;
             moveCount += 0.05F;
-            if(moveCount > maxMove){
+            if(moveCount > maxMove)
+            {
                 panelIndex++;
                 moveCount = 0F;
                 count++;
             }
-        } else if (count <= 0 && moveZ == 0f){
+        }
+        else if (count <= 0 && moveZ == 0f)
+        {
             pos = transform.position;
             pos.y += 0.05F;
             transform.position = pos;
             moveCount += 0.05F;
-            if (moveCount > maxMove2){
+
+            if (moveCount > maxMove2)
+            {
                 panelIndex++;
                 moveCount = 0F;
                 count++;
             }
-        } else if (count > 0 && moveZ == 90f || moveZ == -270f){
+        }
+        else if (count > 0 && moveZ == 90f || moveZ == -270f)
+        {
             pos = transform.position;
             pos.x += 0.05F;
             transform.position = pos;
             moveCount += 0.05F;
-            if (moveCount > maxMove){
+
+            if (moveCount > maxMove)
+            {
                 panelIndex++;
                 moveCount = 0F;
                 count++;
             }
-        } else if (count > 0 && moveZ == 180f || moveZ == -180f){
+        }
+        else if (count > 0 && moveZ == 180f || moveZ == -180f)
+        {
             pos = transform.position;
             pos.y -= 0.05F;
             transform.position = pos;
             moveCount += 0.05F;
-            if (moveCount > maxMove){
+
+            if (moveCount > maxMove)
+            {
                 panelIndex++;
                 moveCount = 0F;
                 count++;
             }
-        } else if (count > 0 && moveZ == 270f || moveZ == -90f){
+        }
+        else if (count > 0 && moveZ == 270f || moveZ == -90f)
+        {
             pos = transform.position;
             pos.x -= 0.05F;
             transform.position = pos;
             moveCount += 0.05F;
-            if (moveCount > maxMove){
+
+            if (moveCount > maxMove)
+            {
                 panelIndex++;
                 moveCount = 0F;
                 count++;
@@ -171,55 +221,75 @@ public class PlayerController : MonoBehaviour{
         }
     }
 
-    private void Back(){
+    private void Back()
+    {
+
         Quaternion q = this.transform.rotation;
         float backZ = q.eulerAngles.z;
-        if (count > 0 && backZ == 0f){
+        if (count > 0 && backZ == 0f)
+        {
             pos = transform.position;
             pos.y -= 0.1F;
             transform.position = pos;
             moveCount += 0.1F;
-            if (moveCount > maxMove){
+            if (moveCount > maxMove)
+            {
                 panelIndex++;
                 moveCount = 0F;
                 count++;
             }
-        } else if (count <= 0 && backZ == 0f){
+        }
+        else if (count <= 0 && backZ == 0f)
+        {
             pos = transform.position;
             pos.y -= 0.1F;
             transform.position = pos;
             moveCount += 0.1F;
-            if (moveCount > maxMove2){
+
+            if (moveCount > maxMove2)
+            {
                 panelIndex++;
                 moveCount = 0F;
                 count++;
             }
-        } else if (count > 0 && backZ == 90f || backZ == -270f){
+        }
+        else if (count > 0 && backZ == 90f || backZ == -270f)
+        {
             pos = transform.position;
             pos.x -= 0.1F;
             transform.position = pos;
             moveCount += 0.1F;
-            if (moveCount > maxMove){
+
+            if (moveCount > maxMove)
+            {
                 panelIndex++;
                 moveCount = 0F;
                 count++;
             }
-        } else if (count > 0 && backZ == 180f || backZ == -180f){
+        }
+        else if (count > 0 && backZ == 180f || backZ == -180f)
+        {
             pos = transform.position;
             pos.y += 0.1F;
             transform.position = pos;
             moveCount += 0.1F;
-            if (moveCount > maxMove){
+
+            if (moveCount > maxMove)
+            {
                 panelIndex++;
                 moveCount = 0F;
                 count++;
             }
-        } else if (count > 0 && backZ == 270f || backZ == -90f){
+        }
+        else if (count > 0 && backZ == 270f || backZ == -90f)
+        {
             pos = transform.position;
             pos.x += 0.1F;
             transform.position = pos;
             moveCount += 0.1F;
-            if (moveCount > maxMove){
+
+            if (moveCount > maxMove)
+            {
                 panelIndex++;
                 moveCount = 0F;
                 count++;
@@ -227,13 +297,17 @@ public class PlayerController : MonoBehaviour{
         }
     }
 
-    private void Right(){
+    private void Right()
+    {
         moveCount += 0.1F;
-        if (moveCount > maxMove){
+
+        if (moveCount > maxMove)
+        {
             moveCount = 0F;
             transform.Rotate(new Vector3(0, 0, 90));
             panelIndex++;
-            switch (meDirection){
+            switch (meDirection)
+            {
                 case FRONT:
                     this.GetComponent<Renderer>().material = leftmaterial;
                     meDirection = LEFT;
@@ -255,13 +329,17 @@ public class PlayerController : MonoBehaviour{
 
     }
 
-    private void Left(){
+    private void Left()
+    {
         moveCount += 0.1F;
-        if (moveCount > maxMove){
+
+        if (moveCount > maxMove)
+        {
             panelIndex++;
             moveCount = 0F;
             transform.Rotate(new Vector3(0, 0, -90));
-            switch (meDirection){
+            switch (meDirection)
+            {
                 case FRONT:
                     this.GetComponent<Renderer>().material = rightmaterial;
                     meDirection = RIGHT;
@@ -282,9 +360,11 @@ public class PlayerController : MonoBehaviour{
         }
     }
 
-    private void MoveCommand(GameObject panelObj){
+    private void MoveCommand(GameObject panelObj)
+    {
         string moveCommand = panelObj.tag;
-        switch (moveCommand){
+        switch (moveCommand)
+        {
             case "moveOn":
                 Move();
                 break;
@@ -316,24 +396,28 @@ public class PlayerController : MonoBehaviour{
 
     }
 
-    private void Action(){
-        if (!checkpointflag){
+    private void Action()
+    {
+        if (!checkpointflag)
+        {
             pauseScript.dispCheckPoint();
             checkpointflag = true;
+            ifCheckFlg = false;
         }
     }
 
-    public void SceneReset(){
-        if (buttonFreezFlg){
+    public void SceneReset()
+    {
+        if (buttonFreezFlg)
+        {
             return;
         }
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(stage);
     }
 
-    public void StatusReset(){
-        clickCount = 0;
-        clickCountX = 0;
+    public void StatusReset()
+    {
         moveList.Clear();
         player.transform.position = defaultPos;
         player.transform.localEulerAngles = defaultRot;
@@ -343,34 +427,39 @@ public class PlayerController : MonoBehaviour{
         this.GetComponent<Renderer>().material = backmaterial;
         Destroy(miss);
         Destroy(goal);
+
         buttonFreezFlg = true;
+
         moveFlg = true;
         panelIndex = 0;
         panelList = panelController.GetPanelList();
         ifActionMap = panelController.GetIfActionMap();
+
         floarController.ResetMaterial();
     }
 
-    void OnTriggerEnter(Collider other){
-        if (other.gameObject.tag == "goal"){
-            if (checkpointflag){
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "goal")
+        {
+            if (checkpointflag)
+            {
+                /*
                 goal = (GameObject)Resources.Load("clear");
                 Vector3 postion = new Vector3(x: -5.5F, y: 0F, z: -5F);
                 goal = Instantiate(goal, postion, Quaternion.identity);
-                StartCoroutine(WaiTtime(3));
-
-            }else{
-                miss = (GameObject)Resources.Load("through");
-                Vector3 postion = new Vector3(x: -5.5F, y: 0F, z: -5F);
-                miss = Instantiate(miss, postion, Quaternion.identity);
+                */
+                pauseScript.DispGoal(goalSprite);
+                StartCoroutine(WaiTtime(2));
+            }
+            else
+            {
+                pauseScript.DispGoal(throwSprite);
             }
         }
 
         if (other.gameObject.tag == "checkpoint" && !checkpointflag && stage =="stage1" || stage =="stage2"){
-            checkpointflag = true;
-            //goalobj = (GameObject)Resources.Load("goal");
-            //Vector3 goalpos = new Vector3(-8.45f, -6.5f, -2f);
-            //goalobj = Instantiate(goalobj, goalpos, Quaternion.identity);
+            ifCheckFlg = true;
 
         }else if(other.gameObject.tag == "checkpoint1" && !checkpointflag && stage == "stage3"){
             stage3check1 = true;
@@ -392,12 +481,25 @@ public class PlayerController : MonoBehaviour{
             goalobj = Instantiate(goalobj, goalpos, Quaternion.identity);
         }
 
+        /*
         if (other.gameObject.tag == "wall"){
             //awa.PlayOneShot(awa.clip);
             miss = (GameObject)Resources.Load("miss");
             Vector3 postion = new Vector3(x: -5.5F, y: 0F, z: -5F);
             miss = Instantiate(miss, postion, Quaternion.identity);
          }
+         */
+        if (other.tag == "floar")
+        {
+            floarController.ChangeMaterial(other.transform.parent.gameObject);
+        }
+        //        if (other.gameObject.tag == "wall")
+        //        {
+        //            awa.PlayOneShot(awa.clip);
+        //            miss = (GameObject)Resources.Load("miss");
+        //            Vector3 postion = new Vector3(x: -5.5F, y: 0F, z: -5F);
+        //            miss = Instantiate(miss, postion, Quaternion.identity);
+        //        }
 
         //        if (other.gameObject.tag == "checkpoint")
         //        {
@@ -423,49 +525,63 @@ public class PlayerController : MonoBehaviour{
         }
     }
 
-    IEnumerator WaiTtime(int num){
+    IEnumerator WaiTtime(int num)
+    {
         yield return new WaitForSeconds(num);
         commandcount = 1;
         SceneManager.LoadScene(nextScenename);
     }
 
-    void OnTriggerExit(Collider other){
-        if (other.gameObject.tag == "checkpoint"){
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "checkpoint")
+        {
             ifCheckFlg = false;
         }
     }
 
-    public void SetIfCheckFlg(){
+    public void SetIfCheckFlg()
+    {
         ifCheckFlg = false;
     }
 
 
-    private void WhileAction(GameObject panelObj){
+    private void WhileAction(GameObject panelObj)
+    {
         button whileButtonCs = panelObj.GetComponent<button>();
         List<GameObject> whilePanelList = whileButtonCs.GetWhilePanelList();
-        if (whilePanelList == null){
+        if (whilePanelList == null)
+        {
             panelIndex++;
             return;
         }
         int whileCountMax = whileButtonCs.GetWhileCount();
 
-        if(whileCountMax > whileCount){
-            if (whilePanelList.Count > whileIndex){
+        if(whileCountMax > whileCount)
+        {
+            if (whilePanelList.Count > whileIndex)
+            {
                 GameObject whilePanel = whilePanelList[whileIndex];
                 MoveCommand(whilePanel);
-                if (moveCount == 0){
+                if (moveCount == 0)
+                {
                     whileIndex++;
                     panelIndex--;
                 }
-            } else {
+            } else
+            {
                 whileIndex = 0;
                 whileCount++;
             }
-            
-            } else {
+        } else
+        {
             whileCount = 0;
             panelIndex++;
-            whileButtonCs.ResetWhilePanelList();
         }
+    }
+
+    public void ChangeMoveFlg()
+    {
+        moveFlg = !moveFlg;
     }
 }

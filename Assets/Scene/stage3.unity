@@ -356,7 +356,7 @@ Transform:
   m_LocalScale: {x: 1.2, y: -1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &200023830
 GameObject:
@@ -674,7 +674,7 @@ Prefab:
     - target: {fileID: 114522003827948104, guid: 7ae094ebe4eef5048b8632451d5ad57f,
         type: 2}
       propertyPath: nextScenename
-      value: test3
+      value: stage1
       objectReference: {fileID: 0}
     - target: {fileID: 64573447607997592, guid: 7ae094ebe4eef5048b8632451d5ad57f,
         type: 2}
@@ -1035,7 +1035,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 425, y: -368}
+  m_AnchoredPosition: {x: 384.61, y: -322.00006}
   m_SizeDelta: {x: 120.32, y: 35.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1353968962
@@ -1376,7 +1376,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 537.39, y: -367.99994}
+  m_AnchoredPosition: {x: 497, y: -322}
   m_SizeDelta: {x: 93.06, y: 35.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1511614398
@@ -1734,7 +1734,7 @@ Canvas:
   m_GameObject: {fileID: 1741354825}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 2
   m_Camera: {fileID: 1776677029}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -1754,20 +1754,20 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1741354825}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 90}
+  m_LocalScale: {x: 0.02577472, y: 0.02577472, z: 0.02577472}
   m_Children:
   - {fileID: 1353968961}
   - {fileID: 1511614397}
   - {fileID: 2122881810}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_SizeDelta: {x: 1280, y: 800}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1766199692 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1259048026710944, guid: 7ae094ebe4eef5048b8632451d5ad57f,
