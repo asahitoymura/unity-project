@@ -63,13 +63,10 @@ public class panelController : MonoBehaviour
         SortPanel();
         return startPanelList;
     }
-    public IDictionary<string, List<GameObject>> GetIfActionMap()
-    {
-        if (ifActionMap.ContainsKey("ifPanel"))
-        {
+    public IDictionary<string, List<GameObject>> GetIfActionMap(){
+        if (ifActionMap.ContainsKey("ifPanel")){
             return ifActionMap;
         }
-
         return null;
     }
 
