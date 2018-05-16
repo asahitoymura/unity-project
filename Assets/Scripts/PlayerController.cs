@@ -86,9 +86,14 @@ public class PlayerController : MonoBehaviour
 
         /*
         seList = GetComponents<AudioSource>();
+<<<<<<< HEAD
         ashioto = seList[0];
         awa = seList[1];
         */
+=======
+        //ashioto = seList[0];
+        //awa = seList[1];
+>>>>>>> 37bf206d35cb3e8a6c21a8a379806b1f8efa85b0
 
         ifCheckFlg = false;
 
@@ -408,18 +413,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void SceneReset()
-    {
-        if (buttonFreezFlg)
-        {
+    public void SceneReset(){
+        if (buttonFreezFlg){
             return;
         }
-
         SceneManager.LoadScene(stage);
     }
 
-    public void StatusReset()
-    {
+    public void StatusReset(){
         moveList.Clear();
         player.transform.position = defaultPos;
         player.transform.localEulerAngles = defaultRot;
@@ -440,12 +441,9 @@ public class PlayerController : MonoBehaviour
         floarController.ResetMaterial();
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "goal")
-        {
-            if (checkpointflag)
-            {
+    void OnTriggerEnter(Collider other)    {
+        if (other.gameObject.tag == "goal"){
+            if (checkpointflag){
                 /*
                 goal = (GameObject)Resources.Load("clear");
                 Vector3 postion = new Vector3(x: -5.5F, y: 0F, z: -5F);
@@ -453,9 +451,7 @@ public class PlayerController : MonoBehaviour
                 */
                 pauseScript.DispGoal(goalSprite);
                 StartCoroutine(WaiTtime(2));
-            }
-            else
-            {
+            } else {
                 pauseScript.DispGoal(throwSprite);
             }
         }
@@ -479,7 +475,7 @@ public class PlayerController : MonoBehaviour
         if(stage3check1 && stage3check2 && stage3check3){
             checkpointflag = true;
             goalobj = (GameObject)Resources.Load("goal");
-            Vector3 goalpos = new Vector3(-8.45f, -6.5f, -2f);
+            Vector3 goalpos = new Vector3(-9.8f, -6.5f, -2f);
             goalobj = Instantiate(goalobj, goalpos, Quaternion.identity);
         }
 

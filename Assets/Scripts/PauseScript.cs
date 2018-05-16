@@ -19,30 +19,22 @@ public class PauseScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (pauseUI.activeSelf)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
+    void Update(){
+        if (pauseUI.activeSelf){
+            if (Input.GetMouseButtonDown(0)){
                 pauseUI.SetActive(false);
                 Time.timeScale = 1f;
                 playerController.SetIfCheckFlg();
                 playerController.ChangeMoveFlg();
             }
-        }
-        else if (Obstacle.activeSelf)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
+        } else if (Obstacle.activeSelf){
+            if (Input.GetMouseButtonDown(0)){
                 Obstacle.SetActive(false);
                 Time.timeScale = 1f;
                 playerController.ChangeMoveFlg();
             }
-        } else if (goalUI.activeSelf)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
+        } else if (goalUI.activeSelf){
+            if (Input.GetMouseButtonDown(0)){
                 goalUI.SetActive(false);
                 Time.timeScale = 1f;
                 playerController.ChangeMoveFlg();
@@ -81,8 +73,7 @@ public class PauseScript : MonoBehaviour
         }
     }
 
-    public void DispGoal(Sprite sprite)
-    {
+    public void DispGoal(Sprite sprite){
         GameObject panelObj = goalUI.transform.Find("Panel").gameObject;
         panelObj.GetComponent<Image>().sprite = sprite;
         

@@ -12,18 +12,15 @@ public class floorController : MonoBehaviour
     public Material Passed;
 
     // Use this for initialization
-    void Start()
-    {
+    void Start(){
         MainSpriteRenderer = gameObject.GetComponent<Renderer>();
-        foreach (Transform child in gameObject.transform)
-        {
+        foreach (Transform child in gameObject.transform){
             child.GetComponent<Renderer>().material = Standby;
         }
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
 
     }
 
@@ -43,10 +40,8 @@ public class floorController : MonoBehaviour
 
     }
 
-    public void ResetMaterial()
-    {
-        foreach (Transform child in gameObject.transform)
-        {
+    public void ResetMaterial(){
+        foreach (Transform child in gameObject.transform){
             child.GetComponent<Renderer>().material = Standby;
         }
     }
