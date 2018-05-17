@@ -86,14 +86,11 @@ public class PlayerController : MonoBehaviour
 
         /*
         seList = GetComponents<AudioSource>();
-<<<<<<< HEAD
         ashioto = seList[0];
         awa = seList[1];
         */
-=======
         //ashioto = seList[0];
         //awa = seList[1];
->>>>>>> 37bf206d35cb3e8a6c21a8a379806b1f8efa85b0
 
         ifCheckFlg = false;
 

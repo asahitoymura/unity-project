@@ -1582,7 +1582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9013064e5d93ac4e9e620926adf38a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiText: {fileID: 283250980}
+  uiText: {fileID: 0}
   intervalForCharacterDisplay: 0.05
 --- !u!1 &293193712
 GameObject:
@@ -1836,7 +1836,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39cccf632ee900c428bbeda649eca9ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Standby: {fileID: 2100000, guid: 6411bed55214cef42a7d22a8d73fff58, type: 2}
+  Standby: {fileID: 2100000, guid: 85778aa260f44ad42aef9ba5a929c856, type: 2}
   Passed: {fileID: 2100000, guid: b0f2818cbc811b54eb24743e4b752c43, type: 2}
 --- !u!212 &334152838
 SpriteRenderer:
@@ -1977,7 +1977,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdf94e31860fcbb47ac28f50bd6d8650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  filepathname: C:\Users\Yuhki Taira\Desktop\CSV
+  filepathname: 
 --- !u!4 &465979333
 Transform:
   m_ObjectHideFlags: 0
@@ -5569,13 +5569,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b1407120155e8d4cb8ee983e58e9bc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goalSprite: {fileID: 21300000, guid: d2df34ccc52dcb848bd9acb7a095f5cf, type: 3}
+  goalSprite: {fileID: 21300000, guid: 9a5781d38c6b03647ae9b273f89b2d06, type: 3}
   throwSprite: {fileID: 21300000, guid: 46850439f8d52cb438e728917b7e65e5, type: 3}
   rightmaterial: {fileID: 2100000, guid: d04c8e1eed713dc4b8b8d54659670d46, type: 2}
   leftmaterial: {fileID: 2100000, guid: 699aa2a87e980d64782a29f20d47265e, type: 2}
   frontmaterial: {fileID: 2100000, guid: d290add8dc9cb904cb2bc75d87825e66, type: 2}
   backmaterial: {fileID: 2100000, guid: da6f8ca2b03934b4ebdc9aa3b580ac2d, type: 2}
-  nextScenename: stage2
+  nextScenename: stage1
 --- !u!33 &1483711211
 MeshFilter:
   m_ObjectHideFlags: 0
