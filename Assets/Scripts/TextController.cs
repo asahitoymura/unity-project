@@ -2,8 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class TextController : MonoBehaviour
-{
+public class TextController : MonoBehaviour{
     private string[] scenarios = new string[] { "これはテストです", "これはテストです2" };
     [SerializeField] Text uiText;
 
@@ -19,15 +18,12 @@ public class TextController : MonoBehaviour
 
 
 
-    void Start()
-    {
+    void Start(){
         SetNextLine();
      }
 
-    void Update()
-    {
-        if (currentLine < scenarios.Length && Input.GetKeyDown(KeyCode.Space))
-        {
+    void Update(){
+        if (currentLine < scenarios.Length && Input.GetKeyDown(KeyCode.Space)){
             SetNextLine();
         }
 
@@ -35,16 +31,14 @@ public class TextController : MonoBehaviour
         int displayCharacterCount = (int)(Mathf.Clamp01((Time.time - timeElapsed) / timeUntilDisplay) * currentText.Length);
 
         // 表示文字数が前回の表示文字数と異なるならテキストを更新する
-        if (displayCharacterCount != lastUpdateCharacter)
-        {
+        if (displayCharacterCount != lastUpdateCharacter){
             uiText.text = currentText.Substring(0, displayCharacterCount);
             lastUpdateCharacter = displayCharacterCount;
         }
     }
 
 
-    void SetNextLine()
-    {
+    void SetNextLine(){
         currentText = scenarios[currentLine];
         currentLine++;
 
