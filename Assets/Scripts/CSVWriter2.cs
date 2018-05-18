@@ -14,7 +14,7 @@ public class CSVWriter2 : MonoBehaviour{
     void Start(){
         //input = GameObject.Find("InputField").GetComponent<InputManager>();
         //        Directory.CreateDirectory("C:/Users/atoyomura/p/edupgm2/test_Data/Resources/CSV/0");
-        Directory.CreateDirectory(filepathname);
+        //Directory.CreateDirectory(filepathname);
     }
 
     // Update is called once per frame
@@ -25,7 +25,7 @@ public class CSVWriter2 : MonoBehaviour{
     public void WriteCSV(string txt){
         StreamWriter streamWriter;
         FileInfo fileInfo;
-        fileInfo = new FileInfo(filepathname+"/" + name + ".csv");
+        fileInfo = new FileInfo(Application.dataPath + "/" +filepathname+"/" + name + ".csv");
         streamWriter = fileInfo.AppendText();
         streamWriter.WriteLine(txt);
         streamWriter.Flush();
