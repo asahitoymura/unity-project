@@ -386,20 +386,24 @@ public class PlayerController : MonoBehaviour{
             }
         }
 
-        if (other.gameObject.tag == "checkpoint" && !checkpointflag && stage =="stage1" || stage =="stage2"){
+        if (other.gameObject.tag == "checkpoint" && !checkpointflag && stage == "stage1" ) {
             ifCheckFlg = true;
 
-        }else if(other.gameObject.tag == "checkpoint1" && !checkpointflag && stage == "stage3"){
+        } else if (other.gameObject.tag == "checkpoint" && stage == "stage2") {
+            checkpointflag = true;
+
+        } else if (other.gameObject.tag == "checkpoint1" && !checkpointflag && stage == "stage3") {
             stage3check1 = true;
             Debug.Log("checkpoint1 : true");
 
-        } else if (other.gameObject.tag == "checkpoint2" && !checkpointflag && stage == "stage3"){
+        } else if (other.gameObject.tag == "checkpoint2" && !checkpointflag && stage == "stage3") {
             stage3check2 = true;
             Debug.Log("checkpoint2 : true");
 
-        } else if (other.gameObject.tag == "checkpoint3" && !checkpointflag && stage == "stage3"){
+        } else if (other.gameObject.tag == "checkpoint3" && !checkpointflag && stage == "stage3") {
             stage3check3 = true;
             Debug.Log("checkpoint3 : true");
+
         }
 
         if(stage3check1 && stage3check2 && stage3check3){
