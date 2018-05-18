@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviour{
     public Sprite goalSprite;
     public Sprite throwSprite;
 
-
     private const string FRONT = "front";
     private const string RIGHT = "right";
     private const string LEFT = "left";

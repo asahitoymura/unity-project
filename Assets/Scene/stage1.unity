@@ -3945,6 +3945,12 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114381576202045780, guid: 613c528b0ea8b454a8d6b1cd7eb0ff7c,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a5781d38c6b03647ae9b273f89b2d06,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 613c528b0ea8b454a8d6b1cd7eb0ff7c, type: 2}
   m_IsPrefabParent: 0
@@ -5563,7 +5569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b1407120155e8d4cb8ee983e58e9bc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goalSprite: {fileID: 21300000, guid: d2df34ccc52dcb848bd9acb7a095f5cf, type: 3}
+  goalSprite: {fileID: 21300000, guid: 9a5781d38c6b03647ae9b273f89b2d06, type: 3}
   throwSprite: {fileID: 21300000, guid: 46850439f8d52cb438e728917b7e65e5, type: 3}
   rightmaterial: {fileID: 2100000, guid: d04c8e1eed713dc4b8b8d54659670d46, type: 2}
   leftmaterial: {fileID: 2100000, guid: 699aa2a87e980d64782a29f20d47265e, type: 2}
