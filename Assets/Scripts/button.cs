@@ -140,6 +140,11 @@ public class button : MonoBehaviour{
         if (Physics.Raycast(upRay, out upHit, 0.7F)){
             // 上方向にパネルがある場合、パネルの下にくっつく。
             GameObject hitObj = upHit.collider.gameObject;
+            // ゴミ箱の場合何もしない。
+            if (hitObj.tag == "dustbox")
+            {
+                return;
+            }
             // 見つけたパネルの親が自分の場合、何もしない
             if (hitObj.transform.parent == null || !hitObj.transform.parent.gameObject.Equals(transform.gameObject)){
                 Vector3 hitOnjPos = hitObj.transform.position;
@@ -163,6 +168,11 @@ public class button : MonoBehaviour{
         } else if (transform.childCount == 0 && Physics.Raycast(downRay, out downHit, 0.7F)){
             // 下方向にパネルがある場合、パネルの上にくっつく。
             GameObject hitObj = downHit.collider.gameObject;
+            // ゴミ箱の場合何もしない。
+            if (hitObj.tag == "dustbox")
+            {
+                return;
+            }
             // 見つけたパネルの親が自分の場合、何もしない
             if (hitObj.transform.parent == null || !hitObj.transform.parent.gameObject.Equals(transform.gameObject)){
                 Vector3 hitOnjPos = hitObj.transform.position;

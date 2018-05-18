@@ -48,7 +48,7 @@ public class LoadCSV : MonoBehaviour{
         //    }
         //}
 
-        csv = Resources.Load(filePass + name) as TextAsset;
+        csv = Resources.Load(filePass +"/"+ name) as TextAsset;
         if (csv == null){
 
         } else {

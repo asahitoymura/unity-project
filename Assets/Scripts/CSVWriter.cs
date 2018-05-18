@@ -26,7 +26,7 @@ public class CSVWriter : MonoBehaviour{
         if (LoadCSV.getI() > 0){
             StreamWriter streamWriter;
             FileInfo fileInfo;
-            fileInfo = new FileInfo(filepathname + "/" + LoadCSV.getIcount().ToString() + "/" + name + ".csv");
+            fileInfo = new FileInfo(Application.dataPath + "/" + filepathname + "/" + name + ".csv");
             streamWriter = fileInfo.AppendText();
             streamWriter.WriteLine(txt);
             com[num] = txt;
@@ -36,7 +36,7 @@ public class CSVWriter : MonoBehaviour{
         } else {
             StreamWriter streamWriter;
             FileInfo fileInfo;
-            fileInfo = new FileInfo(filepathname + "/" + "0/" + name + ".csv");
+            fileInfo = new FileInfo(Application.dataPath + "/" + filepathname + "/" + name + ".csv");
             streamWriter = fileInfo.AppendText();
             streamWriter.WriteLine(txt);
             com[num] = txt;

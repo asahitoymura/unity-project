@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class InputManager : MonoBehaviour{
 
@@ -8,7 +9,8 @@ public class InputManager : MonoBehaviour{
     public string nextscenename;
     CSVWriter2 CSV;
     public static string inputValue;
-
+    public string filepathname;
+    private SubmitButton sb;
     /// <summary>
     /// Startメソッド
     /// InputFieldコンポーネントの取得および初期化メソッドの実行
@@ -27,9 +29,20 @@ public class InputManager : MonoBehaviour{
     public void InputLogger(){
         inputValue = inputField.text;
         //Debug.Log(inputValue);
-        CSV.WriteCSV(inputValue + "," + 0);
+        //sb.SetName(inputValue);
+        StreamWriter sW;
+        FileInfo fi;
+        fi = new FileInfo(Application.dataPath + "/"+ filepathname+"/" + inputValue + ".csv");
+        //CSV.WriteCSV(inputValue + "," + 0);
+
+        sW = fi.AppendText();
+        sW.WriteLine(inputValue + "," + 0);
+        sW.Flush();
+        sW.Close();
+        // sW.Flush();
+        // sW.Close();
         //InitInputField();
-        SceneManager.LoadScene(nextscenename);
+        //SceneManager.LoadScene(nextscenename);
     }
 
     /// <summary>
