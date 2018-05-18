@@ -789,7 +789,13 @@ Prefab:
         type: 2}
       propertyPath: goalSprite
       value: 
-      objectReference: {fileID: 21300000, guid: ff786b0bd1a8f0d42bd69113c8a0fcd1,
+      objectReference: {fileID: 21300000, guid: 891264ae0d045254d985a8e577919235,
+        type: 3}
+    - target: {fileID: 114522003827948104, guid: 7ae094ebe4eef5048b8632451d5ad57f,
+        type: 2}
+      propertyPath: throwSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4e1cd632a8a2d444c87fc6c2ce1d36af,
         type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7ae094ebe4eef5048b8632451d5ad57f, type: 2}
