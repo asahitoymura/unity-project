@@ -98,8 +98,6 @@ public class PlayerController : MonoBehaviour{
     void Update(){
         if (moveFlg){
             //   IDictionary<string, List<GameObject>> ifActionMap = panelController.GetIfActionMap();
-
-
             if (ifActionMap != null && ifCheckFlg){
                 List<GameObject> ifActionObjList = ifActionMap["ifPanel"];
                 MoveCommand(ifActionObjList[0]);

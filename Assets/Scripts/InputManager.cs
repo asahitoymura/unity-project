@@ -11,6 +11,7 @@ public class InputManager : MonoBehaviour{
     public static string inputValue;
     public string filepathname;
     private SubmitButton sb;
+    private string currentScene;
     /// <summary>
     /// Startメソッド
     /// InputFieldコンポーネントの取得および初期化メソッドの実行
@@ -18,7 +19,10 @@ public class InputManager : MonoBehaviour{
     void Start(){
         inputField = GetComponent<InputField>();
         InitInputField();
-        CSV = GameObject.Find("CSVWriter").GetComponent<CSVWriter2>();
+        if(SceneManager.GetActiveScene().name == "stage1"){
+            CSV = GameObject.Find("CSVWriter").GetComponent<CSVWriter2>();
+        }
+        currentScene = SceneManager.GetActiveScene().name;
     }
 
     /// <summary>
@@ -28,21 +32,18 @@ public class InputManager : MonoBehaviour{
 
     public void InputLogger(){
         inputValue = inputField.text;
-        //Debug.Log(inputValue);
-        //sb.SetName(inputValue);
-        StreamWriter sW;
-        FileInfo fi;
-        fi = new FileInfo(Application.dataPath + "/"+ filepathname+"/" + inputValue + ".csv");
-        //CSV.WriteCSV(inputValue + "," + 0);
+        if(currentScene == "stage0"){
+            StreamWriter sW;
+            FileInfo fi;
+            fi = new FileInfo(Application.dataPath + "/"+ filepathname+"/" + inputValue + ".csv");
+            //CSV.WriteCSV(inputValue + "," + 0);
 
-        sW = fi.AppendText();
-        sW.WriteLine(inputValue + "," + 0);
-        sW.Flush();
-        sW.Close();
-        // sW.Flush();
-        // sW.Close();
-        //InitInputField();
-        //SceneManager.LoadScene(nextscenename);
+            sW = fi.AppendText();
+            sW.WriteLine(inputValue + "," + 0);
+            sW.Flush();
+            sW.Close();
+            //SceneManager.LoadScene(nextscenename);
+        }
     }
 
     /// <summary>
