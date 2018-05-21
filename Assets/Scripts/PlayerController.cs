@@ -115,6 +115,9 @@ public class PlayerController : MonoBehaviour{
         if (buttonFreezFlg){
             return;
         }
+        for(int i = 0; i < panelList.Count; i++){
+            moveList[i] = panelList[i].tag;
+        }
         float timeCount = 1F;
         foreach (string moveCommand in moveList){
             CSV.WriteCSV(moveCommand + "," + commandcount);
@@ -374,6 +377,8 @@ public class PlayerController : MonoBehaviour{
     void OnTriggerEnter(Collider other){
         if (other.gameObject.tag == "goal"){
             if (checkpointflag){
+                Debug.Log(moveList.Count);
+                Debug.Log(moveObjList.Count);
                 /*
                 goal = (GameObject)Resources.Load("clear");
                 Vector3 postion = new Vector3(x: -5.5F, y: 0F, z: -5F);

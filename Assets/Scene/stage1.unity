@@ -1915,7 +1915,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdf94e31860fcbb47ac28f50bd6d8650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  filepathname: 
+  filepathname: Resources/CSV
 --- !u!4 &465979333
 Transform:
   m_ObjectHideFlags: 0
@@ -4798,7 +4798,7 @@ MonoBehaviour:
   leftmaterial: {fileID: 2100000, guid: 699aa2a87e980d64782a29f20d47265e, type: 2}
   frontmaterial: {fileID: 2100000, guid: d290add8dc9cb904cb2bc75d87825e66, type: 2}
   backmaterial: {fileID: 2100000, guid: da6f8ca2b03934b4ebdc9aa3b580ac2d, type: 2}
-  nextScenename: stage1
+  nextScenename: stage1Result
 --- !u!33 &1483711211
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -6752,7 +6752,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2013771614
 Transform:
   m_ObjectHideFlags: 0
