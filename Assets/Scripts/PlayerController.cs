@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour{
     // Update is called once per frame
     void Update(){
         if (moveFlg){
-            //   IDictionary<string, List<GameObject>> ifActionMap = panelController.GetIfActionMap();
+            buttonFreezFlg = true;
             if (ifActionMap != null && ifCheckFlg){
                 List<GameObject> ifActionObjList = ifActionMap["ifPanel"];
                 MoveCommand(ifActionObjList[0]);
@@ -108,6 +108,9 @@ public class PlayerController : MonoBehaviour{
                 moveFlg = false;
                 buttonFreezFlg = false;
             }
+        } else
+        {
+            buttonFreezFlg = false;
         }
     }
 
@@ -128,7 +131,7 @@ public class PlayerController : MonoBehaviour{
 //        ashioto.Play();
         Quaternion q = this.transform.rotation;
         float moveZ = q.eulerAngles.z;
-        if (count > 0 && moveZ == 0f){
+        if (moveZ == 0f){
             pos = transform.position;
             pos.y += 0.05F;
             transform.position = pos;
@@ -138,18 +141,20 @@ public class PlayerController : MonoBehaviour{
                 moveCount = 0F;
                 count++;
             }
+            /*
         } else if (count <= 0 && moveZ == 0f){
             pos = transform.position;
             pos.y += 0.05F;
             transform.position = pos;
             moveCount += 0.05F;
 
-            if (moveCount > maxMove2){
+            if (moveCount > maxMove){
                 panelIndex++;
                 moveCount = 0F;
                 count++;
             }
-        } else if (count > 0 && moveZ == 90f || moveZ == -270f){
+            */
+        } else if (moveZ == 90f || moveZ == -270f){
             pos = transform.position;
             pos.x += 0.05F;
             transform.position = pos;
@@ -160,7 +165,7 @@ public class PlayerController : MonoBehaviour{
                 moveCount = 0F;
                 count++;
             }
-        } else if (count > 0 && moveZ == 180f || moveZ == -180f){
+        } else if (moveZ == 180f || moveZ == -180f){
             pos = transform.position;
             pos.y -= 0.05F;
             transform.position = pos;
@@ -171,7 +176,7 @@ public class PlayerController : MonoBehaviour{
                 moveCount = 0F;
                 count++;
             }
-        } else if (count > 0 && moveZ == 270f || moveZ == -90f){
+        } else if (moveZ == 270f || moveZ == -90f){
             pos = transform.position;
             pos.x -= 0.05F;
             transform.position = pos;
