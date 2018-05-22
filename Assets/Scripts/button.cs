@@ -59,11 +59,7 @@ public class button : MonoBehaviour{
 
     // Update is called once per frame
     void Update(){
-        /*
-        Cube.transform.position = (new Vector3(Mathf.Clamp(Cube.transform.position.x, 3F, 9F),
-            Mathf.Clamp(Cube.transform.position.y, -6.5F, 6F),
-            Cube.transform.position.z));
-            */
+        
     }
     void OnMouseDown(){
         // マウスカーソルは、スクリーン座標なので、
@@ -195,7 +191,6 @@ public class button : MonoBehaviour{
             rectTransform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, currentPositionText);
         }
     }
-
 
     public bool GetContactFlg(){
         return contactFlg;

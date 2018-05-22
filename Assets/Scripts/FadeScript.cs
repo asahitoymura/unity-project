@@ -24,7 +24,6 @@ public class FadeScript : MonoBehaviour {
 	void Update () {
         if (isFadeOut){
             StartFadeOut();
-
         }
     }
 

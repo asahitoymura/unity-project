@@ -16,8 +16,6 @@ public class TextController : MonoBehaviour{
     private float timeElapsed = 1;          // 文字列の表示を開始した時間
     private int lastUpdateCharacter = -1;       // 表示中の文字数
 
-
-
     void Start(){
         SetNextLine();
      }

@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour{
     private int panelIndex;
 
     private List<GameObject> panelList;
+    private List<string> plist;
     IDictionary<string, List<GameObject>> ifActionMap;
     private float moveCount;
     private const float maxMove = 2.0F;
@@ -108,8 +109,7 @@ public class PlayerController : MonoBehaviour{
                 moveFlg = false;
                 buttonFreezFlg = false;
             }
-        } else
-        {
+        } else {
             buttonFreezFlg = false;
         }
     }
@@ -118,8 +118,11 @@ public class PlayerController : MonoBehaviour{
         if (buttonFreezFlg){
             return;
         }
+        panelList = panelController.GetPanelList();
         for(int i = 0; i < panelList.Count; i++){
-            moveList[i] = panelList[i].tag;
+            //Debug.Log(panelList.Count);
+            Debug.Log(panelList[i].tag);
+            moveList.Add(panelList[i].tag);
         }
         float timeCount = 1F;
         foreach (string moveCommand in moveList){
@@ -144,19 +147,6 @@ public class PlayerController : MonoBehaviour{
                 moveCount = 0F;
                 count++;
             }
-            /*
-        } else if (count <= 0 && moveZ == 0f){
-            pos = transform.position;
-            pos.y += 0.05F;
-            transform.position = pos;
-            moveCount += 0.05F;
-
-            if (moveCount > maxMove){
-                panelIndex++;
-                moveCount = 0F;
-                count++;
-            }
-            */
         } else if (moveZ == 90f || moveZ == -270f){
             pos = transform.position;
             pos.x += 0.05F;
@@ -373,7 +363,7 @@ public class PlayerController : MonoBehaviour{
 
         moveFlg = true;
         panelIndex = 0;
-        panelList = panelController.GetPanelList();
+        //panelList = panelController.GetPanelList();
         ifActionMap = panelController.GetIfActionMap();
 
         floarController.ResetMaterial();
@@ -382,13 +372,6 @@ public class PlayerController : MonoBehaviour{
     void OnTriggerEnter(Collider other){
         if (other.gameObject.tag == "goal"){
             if (checkpointflag){
-                Debug.Log(moveList.Count);
-                Debug.Log(moveObjList.Count);
-                /*
-                goal = (GameObject)Resources.Load("clear");
-                Vector3 postion = new Vector3(x: -5.5F, y: 0F, z: -5F);
-                goal = Instantiate(goal, postion, Quaternion.identity);
-                */
                 pauseScript.DispGoal(goalSprite);
                 StartCoroutine(WaiTtime(2));
             } else {
@@ -422,36 +405,9 @@ public class PlayerController : MonoBehaviour{
             Vector3 goalpos = new Vector3(-9.8f, -6.5f, -2f);
             goalobj = Instantiate(goalobj, goalpos, Quaternion.identity);
         }
-
-        /*
-        if (other.gameObject.tag == "wall"){
-            //awa.PlayOneShot(awa.clip);
-            miss = (GameObject)Resources.Load("miss");
-            Vector3 postion = new Vector3(x: -5.5F, y: 0F, z: -5F);
-            miss = Instantiate(miss, postion, Quaternion.identity);
-         }
-         */
         if (other.tag == "floar"){
             floarController.ChangeMaterial(other.transform.parent.gameObject);
         }
-        //        if (other.gameObject.tag == "wall")
-        //        {
-        //            awa.PlayOneShot(awa.clip);
-        //            miss = (GameObject)Resources.Load("miss");
-        //            Vector3 postion = new Vector3(x: -5.5F, y: 0F, z: -5F);
-        //            miss = Instantiate(miss, postion, Quaternion.identity);
-        //        }
-
-        //        if (other.gameObject.tag == "checkpoint")
-        //        {
-        //            checkpointflag = true;
-        //
-        //            Debug.Log("talkを表示するよ");
-        //            talk = (GameObject)Resources.Load("talk");
-        //            Vector3 postion = new Vector3(x: -5.5F, y: 0F, z: -5F);
-        //            talk = Instantiate(talk, postion, Quaternion.identity);
-        //            Debug.Log("talkを表示したよ");
-        //        }
         if (other.gameObject.tag == "dog"){
             //awa.PlayOneShot(awa.clip);
             miss = (GameObject)Resources.Load("dogAtack");

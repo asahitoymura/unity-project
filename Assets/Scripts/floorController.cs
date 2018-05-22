@@ -23,15 +23,6 @@ public class floorController : MonoBehaviour{
 
     }
 
-    //    void OnTriggerExit(Collider other)
-    //    {
-    //        Debug.Log("Dive to OnTriggerExit");
-    //        GameObject oya = transform.parent.gameObject;
-    //        ParentRenderer = oya.GetComponent<Renderer>();
-    //        ParentRenderer.material = Passed;
-    //        Debug.Log("Change the Renderer");
-    //    }
-
     public void ChangeMaterial(GameObject oya){
         ParentRenderer = oya.GetComponent<Renderer>();
         ParentRenderer.material = Passed;

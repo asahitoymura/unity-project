@@ -64,7 +64,6 @@ public class PauseScript : MonoBehaviour{
     public void DispGoal(Sprite sprite){
         GameObject panelObj = goalUI.transform.Find("Panel").gameObject;
         panelObj.GetComponent<Image>().sprite = sprite;
-        
         goalUI.SetActive(!goalUI.activeSelf);
         if (goalUI.activeSelf){
             Time.timeScale = 0f;

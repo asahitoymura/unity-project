@@ -5,13 +5,14 @@ using UnityEngine;
 public class panelController : MonoBehaviour{
 
     private List<GameObject> panelList;
-    private List<GameObject> startPanelList;
+    private static List<GameObject> startPanelList;
     private List<GameObject> ifPanelList;
     private List<GameObject> ifActionPanelList;
     private IDictionary<string, List<GameObject>> ifActionMap;
     private GameObject edit;
     private GameObject edit_2;
-    private static List<string> commandList;
+    private List<string> commandList;
+    private List<string> startcomlist;
     private static List<int> comnum;
     private int comindex = 1;
     private float centerPos;
@@ -28,6 +29,7 @@ public class panelController : MonoBehaviour{
         edit_2 = GameObject.Find("edit_2");
 
         commandList = new List<string>();
+        startcomlist = new List<string>();
         comnum = new List<int>();
         csvwriter = GameObject.Find("CSVWriter").GetComponent<CSVWriter>();
 
@@ -44,7 +46,7 @@ public class panelController : MonoBehaviour{
     public void AddPanel(GameObject obj){
         panelList.Add(obj);
         commandList.Add(obj.tag);
-        csvwriter.WriteCSV(obj.tag + "," + comindex);        
+        //csvwriter.WriteCSV(obj.tag + "," + comindex);        
         comnum.Add(comindex);
         comindex++;
     }
@@ -54,7 +56,7 @@ public class panelController : MonoBehaviour{
     public void AddIfActionPanel(GameObject obj){
         ifActionPanelList.Add(obj);
         commandList.Add(obj.tag);
-        csvwriter.WriteCSV(obj.tag + "," + comindex);
+        //csvwriter.WriteCSV(obj.tag + "," + comindex);
         comnum.Add(comindex);
         comindex++;
     }
@@ -88,17 +90,22 @@ public class panelController : MonoBehaviour{
             Destroy(tmp);
         }
         panelList.Clear();
+        commandList.Clear();
 
         foreach(GameObject tmp in ifActionPanelList){
             Destroy(tmp);
         }
         ifActionPanelList.Clear();
+        commandList.Clear();
     }
 
     // パネルの並び替え
     private void SortPanel(){
         List<GameObject> tmpList = new List<GameObject>();
         List<GameObject> tmpList2 = new List<GameObject>();
+
+        List<string> tmpcomlist = new List<string>();
+        List<string> tmpcomlist2 = new List<string>();
 
         foreach (GameObject tmpCube in panelList){
             if (tmpCube.tag == "action"){
@@ -115,6 +122,7 @@ public class panelController : MonoBehaviour{
 
                     if (tmpObjPos.y < tmpCubePos.y){
                         tmpList.Insert(index, tmpCube);
+                        tmpcomlist.Insert(index, tmpCube.tag);
                         break;
                     }
                     index++;
@@ -122,6 +130,7 @@ public class panelController : MonoBehaviour{
                 if (!tmpList.Contains(tmpCube)){
                     if (tmpCube.tag != "action" && tmpCube.tag != "ifPanel"){
                         tmpList.Add(tmpCube);
+                        tmpcomlist.Add(tmpCube.tag);
                     }
                 }
             } else {
@@ -133,6 +142,7 @@ public class panelController : MonoBehaviour{
 
                     if (tmpObjPos.y < tmpCubePos.y){
                         tmpList2.Insert(index, tmpCube);
+                        tmpcomlist2.Insert(index, tmpCube.tag);
                         break;
                     }
                     index++;
@@ -140,20 +150,23 @@ public class panelController : MonoBehaviour{
                 if (!tmpList2.Contains(tmpCube)){
                     if (tmpCube.tag != "action" && tmpCube.tag != "ifPanel"){
                         tmpList2.Add(tmpCube);
+                        tmpcomlist2.Add(tmpCube.tag);
                     }
                 }
             }
         }
         startPanelList = tmpList;
         startPanelList.AddRange(tmpList2);
+        startcomlist = tmpcomlist;
+        startcomlist.AddRange(tmpcomlist2);
         if (ifActionPanelList.Count != 0){
             ifActionMap.Add("ifPanel", ifActionPanelList);
         }
-
     }
 
-    public static List<string> GetCommndList(){
-        return commandList;
+    public List<string> GetCommndList(){
+        SortPanel();
+        return startcomlist;
     }
 
     public static List<int> GetComnum(){

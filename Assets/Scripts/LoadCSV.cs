@@ -28,26 +28,6 @@ public class LoadCSV : MonoBehaviour{
     }
 
     public static void csvload(){
-        //int i = 0;
-        //csv = Resources.Load("CSV/" + name) as TextAsset;
-        //while (flag){
-        //    if (csv == null){
-        //        StartCoroutine(wait(0.1f));
-        //    }else{
-        //        StringReader reader = new StringReader(csv.text);
-        //        while (reader.Peek() > -1){
-        //            string line = reader.ReadLine();
-        //            string[] values = line.Split(',');
-        //            command[i] = values[0];
-        //            num[i] = int.Parse(values[1]);
-        //            i++;
-        //            Debug.Log(command[i]);
-        //            Debug.Log(num[i]);
-        //        }
-        //        flag = false;
-        //    }
-        //}
-
         csv = Resources.Load(filePass +"/"+ name) as TextAsset;
         if (csv == null){
 

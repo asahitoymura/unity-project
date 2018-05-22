@@ -10,6 +10,7 @@ public class Result : MonoBehaviour{
     private int[] number;
     private string[] c = CSVWriter.getCom();
     private List<string> comlist;
+    private List<GameObject> list;
     private List<int> comindex;
     private int count = 0;
     private float posX = 0;
@@ -21,11 +22,14 @@ public class Result : MonoBehaviour{
     private GameObject next;
     private GameObject end;
     private string stagename;
+    panelController panelController;
 
     // Use this for initialization
     void Start(){
         comm = new string[1024];
         number = new int[1024];
+        comlist = new List<string>();
+        list = new List<GameObject>();
         LoadCSV.csvload();
         Text = GameObject.Find("Text").GetComponent<Text>();
         retry = GameObject.Find("Canvas/retry");
@@ -46,13 +50,14 @@ public class Result : MonoBehaviour{
 
     public void load(){
         //count += LoadCSV.getI();
+        list = panelController.GetPanelList();
         comlist = panelController.GetCommndList();
         comindex = panelController.GetComnum();
-        while (!(comlist == null)){
-            string a = comlist[count];
+        for (int i = 0; i < list.Count; i++){
+            string a = list[i].tag;
             //string[] values = a.Split(',');
             if (a.Equals("moveOn")){
-                comm[count] = "まえにすすむ";
+                comm[i] = "まえにすすむ";
                 GameObject prefab = (GameObject)Resources.Load(a);
                 Vector3 postion = new Vector3(x: -8.5F + posX, y: 4.5F - posY, z: 0);
                 Instantiate(prefab, postion, rotation: Quaternion.identity);
@@ -67,7 +72,7 @@ public class Result : MonoBehaviour{
                     x = 0;
                 }
             } else if (a.Equals("turnRight")){
-                comm[count] = "みぎにむく";
+                comm[i] = "みぎにむく";
                 GameObject prefab = (GameObject)Resources.Load(a);
                 Vector3 postion = new Vector3(x: -8.5F + posX, y: 4.5F - posY, z: 0);
                 Instantiate(prefab, postion, rotation: Quaternion.identity);
@@ -82,7 +87,7 @@ public class Result : MonoBehaviour{
                     x = 0;
                 }
             } else if (a.Equals("turnLeft")){
-                comm[count] = "ひだりにむく";
+                comm[i] = "ひだりにむく";
                 GameObject prefab = (GameObject)Resources.Load(a);
                 Vector3 postion = new Vector3(x: -8.5F + posX, y: 4.5F - posY, z: 0);
                 Instantiate(prefab, postion, rotation: Quaternion.identity);
@@ -97,7 +102,7 @@ public class Result : MonoBehaviour{
                     x = 0;
                 }
             } else if (a.Equals("buckOn")){
-                comm[count] = "うしろにすすむ";
+                comm[i] = "うしろにすすむ";
                 GameObject prefab = (GameObject)Resources.Load(a);
                 Vector3 postion = new Vector3(x: -8.5F + posX, y: 4.5F - posY, z: 0);
                 Instantiate(prefab, postion, rotation: Quaternion.identity);
@@ -112,19 +117,19 @@ public class Result : MonoBehaviour{
                     x = 0;
                 }
             } else if (a.Equals("Goal")){
-                comm[count] = "ゴール";
+                comm[i] = "ゴール";
             } else if (a.Equals("Miss")){
-                comm[count] = "ミス";
+                comm[i] = "ミス";
             } else if (a.Equals("action")){
-                comm[count] = "はなしかけた";
+                comm[i] = "はなしかけた";
             } else if(a.Equals("whilePanel")){
-                comm[count] = "くりかえし";
+                comm[i] = "くりかえし";
             } else if(a.Equals("ifPanel")){
-                comm[count] = "もし～なら";
+                comm[i] = "もし～なら";
             }
             
-            number[count] = comindex[count];
-            Debug.Log(comm[count] + ":" + number[count]);
+            number[i] = comindex[i];
+            Debug.Log(comm[i] + ":" + number[i]);
             count++;
         }
         Text.text = count.ToString() + "回";
