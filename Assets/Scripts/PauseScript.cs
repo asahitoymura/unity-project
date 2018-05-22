@@ -41,6 +41,7 @@ public class PauseScript : MonoBehaviour{
     }
     
     public void OnTriggerEnter(Collider other){
+        Debug.Log(other);
         if (other.gameObject.tag == "wall"){
             Obstacle.SetActive(!Obstacle.activeSelf);
             if (Obstacle.activeSelf){
@@ -68,6 +69,22 @@ public class PauseScript : MonoBehaviour{
         if (goalUI.activeSelf){
             Time.timeScale = 0f;
         } else {
+            Time.timeScale = 1f;
+        }
+    }
+
+    public void DispShoping(Sprite sprite)
+    {
+        GameObject panelObj = pauseUI.transform.Find("Panel").gameObject;
+        panelObj.GetComponent<Image>().sprite = sprite;
+
+        pauseUI.SetActive(!pauseUI.activeSelf);
+        if (pauseUI.activeSelf)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
             Time.timeScale = 1f;
         }
     }

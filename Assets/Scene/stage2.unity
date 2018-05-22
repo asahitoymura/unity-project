@@ -984,9 +984,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 353660530}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e2545c008349a247bb8b074db1ac378, type: 3}
+  m_Script: {fileID: 11500000, guid: fdf94e31860fcbb47ac28f50bd6d8650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  filepathname: Resources/CSV
 --- !u!4 &353660532
 Transform:
   m_ObjectHideFlags: 0
@@ -1764,12 +1765,12 @@ Prefab:
     - target: {fileID: 224011755784772298, guid: 7ae094ebe4eef5048b8632451d5ad57f,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -11.120001
+      value: -10.915823
       objectReference: {fileID: 0}
     - target: {fileID: 224011755784772298, guid: 7ae094ebe4eef5048b8632451d5ad57f,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -6.4699993
+      value: -7.098631
       objectReference: {fileID: 0}
     - target: {fileID: 224011755784772298, guid: 7ae094ebe4eef5048b8632451d5ad57f,
         type: 2}
@@ -1804,12 +1805,12 @@ Prefab:
     - target: {fileID: 224011755784772298, guid: 7ae094ebe4eef5048b8632451d5ad57f,
         type: 2}
       propertyPath: m_Pivot.x
-      value: 0.5
+      value: 0.49795818
       objectReference: {fileID: 0}
     - target: {fileID: 224011755784772298, guid: 7ae094ebe4eef5048b8632451d5ad57f,
         type: 2}
       propertyPath: m_Pivot.y
-      value: 0.5
+      value: 0.49371374
       objectReference: {fileID: 0}
     - target: {fileID: 114522003827948104, guid: 7ae094ebe4eef5048b8632451d5ad57f,
         type: 2}

@@ -198,4 +198,10 @@ public class button : MonoBehaviour{
     public void SetContactFlg(bool flg){
         contactFlg = flg;
     }
+
+
+    public void ChangePanel()
+    {
+
+    }
 }
