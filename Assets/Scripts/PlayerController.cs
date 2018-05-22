@@ -118,8 +118,9 @@ public class PlayerController : MonoBehaviour{
         if (buttonFreezFlg){
             return;
         }
-        for(int i = 0; i < panelList.Count; i++){
-            moveList[i] = panelList[i].tag;
+        StatusReset();
+        for (int i = 0; i < panelList.Count; i++){
+            moveList.Add(panelList[i].tag);
         }
         float timeCount = 1F;
         foreach (string moveCommand in moveList){
@@ -127,7 +128,6 @@ public class PlayerController : MonoBehaviour{
             commandcount++;
             timeCount++;
         }
-        StatusReset();
     }
 
     private void Move(){
@@ -144,19 +144,6 @@ public class PlayerController : MonoBehaviour{
                 moveCount = 0F;
                 count++;
             }
-            /*
-        } else if (count <= 0 && moveZ == 0f){
-            pos = transform.position;
-            pos.y += 0.05F;
-            transform.position = pos;
-            moveCount += 0.05F;
-
-            if (moveCount > maxMove){
-                panelIndex++;
-                moveCount = 0F;
-                count++;
-            }
-            */
         } else if (moveZ == 90f || moveZ == -270f){
             pos = transform.position;
             pos.x += 0.05F;

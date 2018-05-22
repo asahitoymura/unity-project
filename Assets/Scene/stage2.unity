@@ -984,9 +984,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 353660530}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e2545c008349a247bb8b074db1ac378, type: 3}
+  m_Script: {fileID: 11500000, guid: fdf94e31860fcbb47ac28f50bd6d8650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  filepathname: Resources/CSV
 --- !u!4 &353660532
 Transform:
   m_ObjectHideFlags: 0
