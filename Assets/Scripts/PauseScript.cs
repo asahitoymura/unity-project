@@ -72,4 +72,20 @@ public class PauseScript : MonoBehaviour{
             Time.timeScale = 1f;
         }
     }
+
+    public void DispShoping(Sprite sprite)
+    {
+        GameObject panelObj = pauseUI.transform.Find("Panel").gameObject;
+        panelObj.GetComponent<Image>().sprite = sprite;
+
+        pauseUI.SetActive(!pauseUI.activeSelf);
+        if (pauseUI.activeSelf)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
+    }
 }
