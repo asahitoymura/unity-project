@@ -759,7 +759,7 @@ Prefab:
     - target: {fileID: 224011755784772298, guid: 7ae094ebe4eef5048b8632451d5ad57f,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -6.2700033
+      value: -6.64
       objectReference: {fileID: 0}
     - target: {fileID: 224011755784772298, guid: 7ae094ebe4eef5048b8632451d5ad57f,
         type: 2}
@@ -870,9 +870,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 951091918}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e2545c008349a247bb8b074db1ac378, type: 3}
+  m_Script: {fileID: 11500000, guid: fdf94e31860fcbb47ac28f50bd6d8650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  filepathname: Resources/CSV
 --- !u!4 &951091920
 Transform:
   m_ObjectHideFlags: 0
@@ -928,6 +929,10 @@ Prefab:
     - target: {fileID: 1078777437110904, guid: f247aaa2212768248882d47a163d545a, type: 2}
       propertyPath: m_Name
       value: wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 4095914980566736, guid: f247aaa2212768248882d47a163d545a, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f247aaa2212768248882d47a163d545a, type: 2}
@@ -1032,7 +1037,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4251468311226904, guid: 23df37e3431af394499f3678039ec836, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -2
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4251468311226904, guid: 23df37e3431af394499f3678039ec836, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1351,7 +1356,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4341814709146200, guid: e4029ab340fe2d34aa7f17051e1056b3, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -0.5
+      value: 0.17
       objectReference: {fileID: 0}
     - target: {fileID: 4341814709146200, guid: e4029ab340fe2d34aa7f17051e1056b3, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1967,6 +1972,17 @@ MonoBehaviour:
   pauseUI: {fileID: 1720888646}
   Obstacle: {fileID: 1512054942}
   goalUI: {fileID: 2051051859}
+--- !u!114 &1766199694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1766199692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca4750bd84de0ba4f8ad36a4920197d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!65 &1766199699
 BoxCollider:
   m_ObjectHideFlags: 0
