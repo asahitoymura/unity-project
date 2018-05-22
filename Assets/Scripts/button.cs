@@ -7,7 +7,6 @@ public class button : MonoBehaviour{
 
     public GameObject Cube;
     private panelController panelController;
-
     private Vector3 screenPoint;
     private Vector3 offset;
     private bool click;
@@ -141,8 +140,7 @@ public class button : MonoBehaviour{
             // 上方向にパネルがある場合、パネルの下にくっつく。
             GameObject hitObj = upHit.collider.gameObject;
             // ゴミ箱の場合何もしない。
-            if (hitObj.tag == "dustbox")
-            {
+            if (hitObj.tag == "dustbox"){
                 return;
             }
             // 見つけたパネルの親が自分の場合、何もしない
@@ -169,8 +167,7 @@ public class button : MonoBehaviour{
             // 下方向にパネルがある場合、パネルの上にくっつく。
             GameObject hitObj = downHit.collider.gameObject;
             // ゴミ箱の場合何もしない。
-            if (hitObj.tag == "dustbox")
-            {
+            if (hitObj.tag == "dustbox"){
                 return;
             }
             // 見つけたパネルの親が自分の場合、何もしない

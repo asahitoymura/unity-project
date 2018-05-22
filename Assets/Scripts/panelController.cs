@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class panelController : MonoBehaviour
-{
+public class panelController : MonoBehaviour{
 
     private List<GameObject> panelList;
     private List<GameObject> startPanelList;
@@ -12,12 +11,13 @@ public class panelController : MonoBehaviour
     private IDictionary<string, List<GameObject>> ifActionMap;
     private GameObject edit;
     private GameObject edit_2;
-
+    private static List<string> commandList;
+    private static List<int> comnum;
+    private int comindex = 1;
     private float centerPos;
-
+    CSVWriter csvwriter;
     // Use this for initialization
-    void Start()
-    {
+    void Start(){
         panelList = new List<GameObject>();
         startPanelList = new List<GameObject>();
         ifPanelList = new List<GameObject>();
@@ -27,47 +27,51 @@ public class panelController : MonoBehaviour
         edit = GameObject.Find("edit");
         edit_2 = GameObject.Find("edit_2");
 
+        commandList = new List<string>();
+        comnum = new List<int>();
+        csvwriter = GameObject.Find("CSVWriter").GetComponent<CSVWriter>();
+
         centerPos = (edit.transform.position.x + edit_2.transform.position.x) / 2;
 
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
 
     }
 
 
-    public void AddPanel(GameObject obj)
-    {
+    public void AddPanel(GameObject obj){
         panelList.Add(obj);
+        commandList.Add(obj.tag);
+        csvwriter.WriteCSV(obj.tag + "," + comindex);        
+        comnum.Add(comindex);
+        comindex++;
     }
-    public void AddIfPanel(GameObject obj)
-    {
+    public void AddIfPanel(GameObject obj){
         ifPanelList.Add(obj);
     }
-    public void AddIfActionPanel(GameObject obj)
-    {
+    public void AddIfActionPanel(GameObject obj){
         ifActionPanelList.Add(obj);
+        commandList.Add(obj.tag);
+        csvwriter.WriteCSV(obj.tag + "," + comindex);
+        comnum.Add(comindex);
+        comindex++;
     }
 
-    public void DeletePanel(GameObject obj)
-    {
+    public void DeletePanel(GameObject obj){
         Destroy(panelList.Find(x => x == obj));
         panelList.Remove(obj);
 
         Destroy(ifActionPanelList.Find(x => x == obj));
         ifActionPanelList.Remove(obj);
-
     }
 
-    public void DeletePanelList(GameObject obj)
-    {
+    public void DeletePanelList(GameObject obj){
         panelList.Remove(obj);
     }
 
-    public List<GameObject> GetPanelList()
-    {
+    public List<GameObject> GetPanelList(){
         SortPanel();
         return startPanelList;
     }
@@ -79,77 +83,62 @@ public class panelController : MonoBehaviour
     }
 
     // パネルリストを空にする
-    public void ResetPanelList()
-    {
-        foreach (GameObject tmp in panelList)
-        {
+    public void ResetPanelList(){
+        foreach (GameObject tmp in panelList){
             Destroy(tmp);
         }
         panelList.Clear();
 
-        foreach(GameObject tmp in ifActionPanelList)
-        {
+        foreach(GameObject tmp in ifActionPanelList){
             Destroy(tmp);
         }
         ifActionPanelList.Clear();
     }
 
     // パネルの並び替え
-    private void SortPanel()
-    {
+    private void SortPanel(){
         List<GameObject> tmpList = new List<GameObject>();
         List<GameObject> tmpList2 = new List<GameObject>();
 
-        foreach (GameObject tmpCube in panelList)
-        {
-            if (tmpCube.tag == "action")
-            {
+        foreach (GameObject tmpCube in panelList){
+            if (tmpCube.tag == "action"){
                 AddIfActionPanel(tmpCube);
                 continue;
             }
 
             // エディットフィールドの左側を最初に実行する
-            if (tmpCube.transform.position.x < centerPos)
-            {
+            if (tmpCube.transform.position.x < centerPos){
                 int index = 0;
-                foreach (GameObject tmpObj in tmpList)
-                {
+                foreach (GameObject tmpObj in tmpList){
                     Vector3 tmpObjPos = tmpObj.transform.position;
                     Vector3 tmpCubePos = tmpCube.transform.position;
 
-                    if (tmpObjPos.y < tmpCubePos.y)
-                    {
+                    if (tmpObjPos.y < tmpCubePos.y){
                         tmpList.Insert(index, tmpCube);
                         break;
                     }
                     index++;
                 }
-                if (!tmpList.Contains(tmpCube))
-                {
-                    if (tmpCube.tag != "action" && tmpCube.tag != "ifPanel")
-                    {
+                if (!tmpList.Contains(tmpCube)){
+                    if (tmpCube.tag != "action" && tmpCube.tag != "ifPanel"){
                         tmpList.Add(tmpCube);
                     }
                 }
             } else {
                 // エディットフィールドの右側を次に実行する
                 int index = 0;
-                foreach (GameObject tmpObj in tmpList2)
-                {
+                foreach (GameObject tmpObj in tmpList2){
                     Vector3 tmpObjPos = tmpObj.transform.position;
                     Vector3 tmpCubePos = tmpCube.transform.position;
 
-                    if (tmpObjPos.y < tmpCubePos.y)
-                    {
+                    if (tmpObjPos.y < tmpCubePos.y){
                         tmpList2.Insert(index, tmpCube);
                         break;
                     }
                     index++;
                 }
-                if (!tmpList2.Contains(tmpCube))
-                {
-                    if (tmpCube.tag != "action" && tmpCube.tag != "ifPanel")
-                    {
+                if (!tmpList2.Contains(tmpCube)){
+                    if (tmpCube.tag != "action" && tmpCube.tag != "ifPanel"){
                         tmpList2.Add(tmpCube);
                     }
                 }
@@ -157,10 +146,17 @@ public class panelController : MonoBehaviour
         }
         startPanelList = tmpList;
         startPanelList.AddRange(tmpList2);
-        if (ifActionPanelList.Count != 0)
-        {
+        if (ifActionPanelList.Count != 0){
             ifActionMap.Add("ifPanel", ifActionPanelList);
         }
 
+    }
+
+    public static List<string> GetCommndList(){
+        return commandList;
+    }
+
+    public static List<int> GetComnum(){
+        return comnum;
     }
 }

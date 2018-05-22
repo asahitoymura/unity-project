@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Result : MonoBehaviour{
 
     private string[] comm;
     private int[] number;
     private string[] c = CSVWriter.getCom();
+    private List<string> comlist;
+    private List<int> comindex;
     private int count = 0;
     private float posX = 0;
     private float posY = 0;
@@ -17,6 +20,7 @@ public class Result : MonoBehaviour{
     private GameObject retry;
     private GameObject next;
     private GameObject end;
+    private string stagename;
 
     // Use this for initialization
     void Start(){
@@ -29,7 +33,10 @@ public class Result : MonoBehaviour{
         next = GameObject.Find("Canvas/next");
         next.SetActive(false);
         end = GameObject.Find("end");
-        end.SetActive(false);
+        stagename = SceneManager.GetActiveScene().name;
+        if(stagename == "stage3"){
+            end.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -38,13 +45,15 @@ public class Result : MonoBehaviour{
     }
 
     public void load(){
-        count += LoadCSV.getI();
-        while (!(c[count] == null)){
-            string a = c[count];
-            string[] values = a.Split(',');
-            if (values[0].Equals("moveOn")){
+        //count += LoadCSV.getI();
+        comlist = panelController.GetCommndList();
+        comindex = panelController.GetComnum();
+        while (!(comlist == null)){
+            string a = comlist[count];
+            //string[] values = a.Split(',');
+            if (a.Equals("moveOn")){
                 comm[count] = "まえにすすむ";
-                GameObject prefab = (GameObject)Resources.Load(values[0]);
+                GameObject prefab = (GameObject)Resources.Load(a);
                 Vector3 postion = new Vector3(x: -8.5F + posX, y: 4.5F - posY, z: 0);
                 Instantiate(prefab, postion, rotation: Quaternion.identity);
                 GameObject yazirusi = (GameObject)Resources.Load("sita");
@@ -57,9 +66,9 @@ public class Result : MonoBehaviour{
                     posY = 0;
                     x = 0;
                 }
-            } else if (values[0].Equals("turnRight")){
+            } else if (a.Equals("turnRight")){
                 comm[count] = "みぎにむく";
-                GameObject prefab = (GameObject)Resources.Load(values[0]);
+                GameObject prefab = (GameObject)Resources.Load(a);
                 Vector3 postion = new Vector3(x: -8.5F + posX, y: 4.5F - posY, z: 0);
                 Instantiate(prefab, postion, rotation: Quaternion.identity);
                 GameObject yazirusi = (GameObject)Resources.Load("sita");
@@ -72,9 +81,9 @@ public class Result : MonoBehaviour{
                     posY = 0;
                     x = 0;
                 }
-            } else if (values[0].Equals("turnLeft")){
+            } else if (a.Equals("turnLeft")){
                 comm[count] = "ひだりにむく";
-                GameObject prefab = (GameObject)Resources.Load(values[0]);
+                GameObject prefab = (GameObject)Resources.Load(a);
                 Vector3 postion = new Vector3(x: -8.5F + posX, y: 4.5F - posY, z: 0);
                 Instantiate(prefab, postion, rotation: Quaternion.identity);
                 GameObject yazirusi = (GameObject)Resources.Load("sita");
@@ -87,9 +96,9 @@ public class Result : MonoBehaviour{
                     posY = 0;
                     x = 0;
                 }
-            } else if (values[0].Equals("buckOn")){
+            } else if (a.Equals("buckOn")){
                 comm[count] = "うしろにすすむ";
-                GameObject prefab = (GameObject)Resources.Load(values[0]);
+                GameObject prefab = (GameObject)Resources.Load(a);
                 Vector3 postion = new Vector3(x: -8.5F + posX, y: 4.5F - posY, z: 0);
                 Instantiate(prefab, postion, rotation: Quaternion.identity);
                 GameObject yazirusi = (GameObject)Resources.Load("sita");
@@ -102,12 +111,19 @@ public class Result : MonoBehaviour{
                     posY = 0;
                     x = 0;
                 }
-            } else if (values[0].Equals("Goal")){
+            } else if (a.Equals("Goal")){
                 comm[count] = "ゴール";
-            } else if (values[0].Equals("Miss")){
+            } else if (a.Equals("Miss")){
                 comm[count] = "ミス";
+            } else if (a.Equals("action")){
+                comm[count] = "はなしかけた";
+            } else if(a.Equals("whilePanel")){
+                comm[count] = "くりかえし";
+            } else if(a.Equals("ifPanel")){
+                comm[count] = "もし～なら";
             }
-            number[count] = int.Parse(values[1]);
+            
+            number[count] = comindex[count];
             Debug.Log(comm[count] + ":" + number[count]);
             count++;
         }
