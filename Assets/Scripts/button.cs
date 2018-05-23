@@ -128,6 +128,7 @@ public class button : MonoBehaviour{
                 transform.parent = hitObj.transform;
                 hitObj.GetComponent<button>().AddWhilePanel(transform.gameObject);
                 panelController.DeletePanelList(transform.gameObject);
+                hitObj.GetComponent<TransformPanel>().TransfaPanel(transform.localScale.y);
             }
         }
 
@@ -135,8 +136,8 @@ public class button : MonoBehaviour{
         if (Physics.Raycast(upRay, out upHit, 0.7F)){
             // 上方向にパネルがある場合、パネルの下にくっつく。
             GameObject hitObj = upHit.collider.gameObject;
-            // ゴミ箱の場合何もしない。
-            if (hitObj.tag == "dustbox"){
+            // ゴミ箱,繰り返し,もしの場合何もしない。
+            if (hitObj.tag == "dustbox" || hitObj.tag == "whilePanel" || hitObj.tag == "ifPanel"){
                 return;
             }
             // 見つけたパネルの親が自分の場合、何もしない

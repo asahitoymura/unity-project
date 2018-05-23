@@ -40,8 +40,7 @@ public class PauseScript : MonoBehaviour{
         }
     }
     
-    public void OnTriggerEnter(Collider other){
-        Debug.Log(other);
+    void OnTriggerEnter(Collider other){
         if (other.gameObject.tag == "wall"){
             Obstacle.SetActive(!Obstacle.activeSelf);
             if (Obstacle.activeSelf){
