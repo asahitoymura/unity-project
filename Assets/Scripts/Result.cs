@@ -23,6 +23,7 @@ public class Result : MonoBehaviour{
     private GameObject end;
     private string stagename;
     panelController panelController;
+    PlayerController PlayerController;
 
     // Use this for initialization
     void Start(){
@@ -50,11 +51,10 @@ public class Result : MonoBehaviour{
 
     public void load(){
         //count += LoadCSV.getI();
-        list = panelController.GetPanelList();
-        comlist = panelController.GetCommndList();
+        comlist = PlayerController.GetMoveList();
         comindex = panelController.GetComnum();
-        for (int i = 0; i < list.Count; i++){
-            string a = list[i].tag;
+        for (int i = 0; i < comlist.Count; i++){
+            string a = comlist[i];
             //string[] values = a.Split(',');
             if (a.Equals("moveOn")){
                 comm[i] = "まえにすすむ";
@@ -121,7 +121,11 @@ public class Result : MonoBehaviour{
             } else if (a.Equals("Miss")){
                 comm[i] = "ミス";
             } else if (a.Equals("action")){
-                comm[i] = "はなしかけた";
+                if(stagename == "stage1"){
+                    comm[i] = "はなしかけた";
+                }else if(stagename == "stage3"){
+                    comm[i] = "かいものした";
+                }
             } else if(a.Equals("whilePanel")){
                 comm[i] = "くりかえし";
             } else if(a.Equals("ifPanel")){

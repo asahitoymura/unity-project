@@ -73,8 +73,7 @@ public class PauseScript : MonoBehaviour{
         }
     }
 
-    public void DispShoping(Sprite sprite)
-    {
+    public void DispShoping(Sprite sprite){
         GameObject panelObj = pauseUI.transform.Find("Panel").gameObject;
         panelObj.GetComponent<Image>().sprite = sprite;
 

@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour{
     Vector3 defaultRot;
     private int count;
 
-    private List<string> moveList;
+    private static List<string> moveList;
     List<GameObject> moveObjList;
     private bool checkpointflag;
     private int commandcount = 1;
@@ -92,6 +92,7 @@ public class PlayerController : MonoBehaviour{
         whileCount = 0;
         whileIndex = 0;
         stage = SceneManager.GetActiveScene().name;
+        CSV.WriteCSV(stage + "," + 0);
     }
 
     // Update is called once per frame
@@ -108,8 +109,7 @@ public class PlayerController : MonoBehaviour{
                 moveFlg = false;
                 buttonFreezFlg = false;
             }
-        } else
-        {
+        } else {
             buttonFreezFlg = false;
         }
     }
@@ -121,6 +121,10 @@ public class PlayerController : MonoBehaviour{
         StatusReset();
         for (int i = 0; i < panelList.Count; i++){
             moveList.Add(panelList[i].tag);
+            if(moveList[i] == "ifPanel"){
+                moveList.Add("action");
+            }
+            //Debug.Log(moveList[i]);
         }
         float timeCount = 1F;
         foreach (string moveCommand in moveList){
@@ -333,8 +337,16 @@ public class PlayerController : MonoBehaviour{
     private void Action(){
         if (!checkpointflag){
             pauseScript.dispCheckPoint();
+            //moveList.Add(GameObject.Find("speak").tag);
+            // for(int i = 0; i < moveList.Count; i++){
+            //     if(moveList[i] == "ifPanel"){
+            //         moveList.Insert(i,"action");
+            //     }
+            // }
+            // CSV.WriteCSV("action," + commandcount );
             checkpointflag = true;
             ifCheckFlg = false;
+            commandcount++;
         }
     }
 
@@ -362,7 +374,7 @@ public class PlayerController : MonoBehaviour{
         panelIndex = 0;
         panelList = panelController.GetPanelList();
         ifActionMap = panelController.GetIfActionMap();
-
+        
         floarController.ResetMaterial();
     }
 
@@ -410,35 +422,9 @@ public class PlayerController : MonoBehaviour{
             goalobj = Instantiate(goalobj, goalpos, Quaternion.identity);
         }
 
-        /*
-        if (other.gameObject.tag == "wall"){
-            //awa.PlayOneShot(awa.clip);
-            miss = (GameObject)Resources.Load("miss");
-            Vector3 postion = new Vector3(x: -5.5F, y: 0F, z: -5F);
-            miss = Instantiate(miss, postion, Quaternion.identity);
-         }
-         */
         if (other.tag == "floar"){
             floarController.ChangeMaterial(other.transform.parent.gameObject);
         }
-        //        if (other.gameObject.tag == "wall")
-        //        {
-        //            awa.PlayOneShot(awa.clip);
-        //            miss = (GameObject)Resources.Load("miss");
-        //            Vector3 postion = new Vector3(x: -5.5F, y: 0F, z: -5F);
-        //            miss = Instantiate(miss, postion, Quaternion.identity);
-        //        }
-
-        //        if (other.gameObject.tag == "checkpoint")
-        //        {
-        //            checkpointflag = true;
-        //
-        //            Debug.Log("talkを表示するよ");
-        //            talk = (GameObject)Resources.Load("talk");
-        //            Vector3 postion = new Vector3(x: -5.5F, y: 0F, z: -5F);
-        //            talk = Instantiate(talk, postion, Quaternion.identity);
-        //            Debug.Log("talkを表示したよ");
-        //        }
         if (other.gameObject.tag == "dog"){
             //awa.PlayOneShot(awa.clip);
             miss = (GameObject)Resources.Load("dogAtack");
@@ -498,5 +484,9 @@ public class PlayerController : MonoBehaviour{
 
     public void ChangeMoveFlg(){
         moveFlg = !moveFlg;
+    }
+
+    public static List<string> GetMoveList(){
+        return moveList;
     }
 }

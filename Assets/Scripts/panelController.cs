@@ -17,6 +17,7 @@ public class panelController : MonoBehaviour{
     private int comindex = 1;
     private float centerPos;
     CSVWriter csvwriter;
+    private int ifcount;
     // Use this for initialization
     void Start(){
         panelList = new List<GameObject>();
@@ -34,7 +35,7 @@ public class panelController : MonoBehaviour{
         csvwriter = GameObject.Find("CSVWriter").GetComponent<CSVWriter>();
 
         centerPos = (edit.transform.position.x + edit_2.transform.position.x) / 2;
-
+        ifcount = 0;
     }
 
     // Update is called once per frame
@@ -128,7 +129,7 @@ public class panelController : MonoBehaviour{
                     index++;
                 }
                 if (!tmpList.Contains(tmpCube)){
-                    if (tmpCube.tag != "action" && tmpCube.tag != "ifPanel"){
+                    if (tmpCube.tag != "action"){
                         tmpList.Add(tmpCube);
                         tmpcomlist.Add(tmpCube.tag);
                     }
@@ -148,7 +149,7 @@ public class panelController : MonoBehaviour{
                     index++;
                 }
                 if (!tmpList2.Contains(tmpCube)){
-                    if (tmpCube.tag != "action" && tmpCube.tag != "ifPanel"){
+                    if (tmpCube.tag != "action"){
                         tmpList2.Add(tmpCube);
                         tmpcomlist2.Add(tmpCube.tag);
                     }
@@ -159,8 +160,13 @@ public class panelController : MonoBehaviour{
         startPanelList.AddRange(tmpList2);
         startcomlist = tmpcomlist;
         startcomlist.AddRange(tmpcomlist2);
+        // foreach (string spl in startcomlist){
+        //     Debug.Log(spl);
+        // }
+        Debug.Log(ifActionPanelList.Count);
         if (ifActionPanelList.Count != 0){
-            ifActionMap.Add("ifPanel", ifActionPanelList);
+            ifActionMap.Add("ifPanel"+ ifcount, ifActionPanelList);
+            ifcount++;
         }
     }
 

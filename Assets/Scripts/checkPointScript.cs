@@ -19,17 +19,13 @@ public class checkPointScript : MonoBehaviour {
 		
 	}
 
-    void OnCollisionEnter(Collider other)
-    {
+    void OnCollisionEnter(Collision other){
         Debug.Log("お店に入りました collision");
         pauseScript.DispShoping(talkPanel);
-        
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player")
-        {
+    void OnTriggerEnter(Collider other){
+        if (other.tag == "Player"){
             Debug.Log("お店に入りました triger");
             pauseScript.DispShoping(talkPanel);
         }
