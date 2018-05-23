@@ -25,6 +25,7 @@ TagManager:
   - checkpoint2
   - checkpoint3
   - sleepingDog
+  - switching
   layers:
   - Default
   - TransparentFX

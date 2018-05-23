@@ -163,7 +163,7 @@ public class panelController : MonoBehaviour{
         // foreach (string spl in startcomlist){
         //     Debug.Log(spl);
         // }
-        Debug.Log(ifActionPanelList.Count);
+        // Debug.Log(ifActionPanelList.Count);
         if (ifActionPanelList.Count != 0){
             ifActionMap.Add("ifPanel"+ ifcount, ifActionPanelList);
             ifcount++;

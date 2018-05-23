@@ -36,10 +36,12 @@ public class Result : MonoBehaviour{
         retry = GameObject.Find("Canvas/retry");
         retry.SetActive(false);
         next = GameObject.Find("Canvas/next");
-        next.SetActive(false);
+        if(stagename == "stage1Result" || stagename == "stage2Result"){
+            next.SetActive(false);
+        }
         end = GameObject.Find("end");
         stagename = SceneManager.GetActiveScene().name;
-        if(stagename == "stage3"){
+        if(stagename == "stage3Result"){
             end.SetActive(false);
         }
     }

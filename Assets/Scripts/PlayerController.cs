@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour{
     private bool stage3check3;
     private string stage;
     private GameObject goalobj;
+    private bool switching;
 
     // Use this for initialization
     void Start(){
@@ -93,6 +94,8 @@ public class PlayerController : MonoBehaviour{
         whileIndex = 0;
         stage = SceneManager.GetActiveScene().name;
         CSV.WriteCSV(stage + "," + 0);
+        switching = false;
+        
     }
 
     // Update is called once per frame
@@ -148,6 +151,7 @@ public class PlayerController : MonoBehaviour{
                 moveCount = 0F;
                 count++;
             }
+            //Debug.Log("a");
         } else if (moveZ == 90f || moveZ == -270f){
             pos = transform.position;
             pos.x += 0.05F;
@@ -159,6 +163,7 @@ public class PlayerController : MonoBehaviour{
                 moveCount = 0F;
                 count++;
             }
+            //Debug.Log("a");
         } else if (moveZ == 180f || moveZ == -180f){
             pos = transform.position;
             pos.y -= 0.05F;
@@ -170,6 +175,7 @@ public class PlayerController : MonoBehaviour{
                 moveCount = 0F;
                 count++;
             }
+            //Debug.Log("a");
         } else if (moveZ == 270f || moveZ == -90f){
             pos = transform.position;
             pos.x -= 0.05F;
@@ -365,9 +371,12 @@ public class PlayerController : MonoBehaviour{
         checkpointflag = false;
         meDirection = BACK;
         this.GetComponent<Renderer>().material = backmaterial;
+        if(stage == "stage3"){
+            Destroy(goalobj);
+        }
         Destroy(miss);
         Destroy(goal);
-
+        switching = false;
         buttonFreezFlg = true;
 
         moveFlg = true;
@@ -420,10 +429,12 @@ public class PlayerController : MonoBehaviour{
         }
 
         //stg3 スタート地点/ゴール地点の切り替え
-        if(other.gameObject.tag == "switching") { 
+        if(other.gameObject.tag == "switching" && switching == false) { 
             goalobj = (GameObject)Resources.Load("goal");
             Vector3 goalpos = new Vector3(-9.8f, -6.5f, -2f);
             goalobj = Instantiate(goalobj, goalpos, Quaternion.identity);
+            goalobj.name = "goal";
+            switching = true;
         }
 
         if (other.tag == "floar"){
@@ -453,6 +464,12 @@ public class PlayerController : MonoBehaviour{
         if (other.gameObject.tag == "checkpoint"){
             ifCheckFlg = false;
         }
+        // if(other.gameObject.tag == "switching") { 
+        //     goalobj = (GameObject)Resources.Load("goal");
+        //     Vector3 goalpos = new Vector3(-9.8f, -6.5f, -2f);
+        //     goalobj = Instantiate(goalobj, goalpos, Quaternion.identity);
+        //     goalobj.SetActive(true);
+        // }
     }
 
     public void SetIfCheckFlg(){
