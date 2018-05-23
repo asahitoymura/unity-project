@@ -415,8 +415,12 @@ public class PlayerController : MonoBehaviour{
 
         }
 
-        if(stage3check1 && stage3check2 && stage3check3){
+        if (stage3check1 && stage3check2 && stage3check3) {
             checkpointflag = true;
+        }
+
+        //stg3 スタート地点/ゴール地点の切り替え
+        if(other.gameObject.tag == "switching") { 
             goalobj = (GameObject)Resources.Load("goal");
             Vector3 goalpos = new Vector3(-9.8f, -6.5f, -2f);
             goalobj = Instantiate(goalobj, goalpos, Quaternion.identity);
