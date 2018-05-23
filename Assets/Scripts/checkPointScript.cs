@@ -19,12 +19,14 @@ public class checkPointScript : MonoBehaviour {
 		
 	}
 
+    /*
     void OnCollisionEnter(Collider other)
     {
         Debug.Log("お店に入りました collision");
         pauseScript.DispShoping(talkPanel);
         
     }
+    */
 
     void OnTriggerEnter(Collider other)
     {
