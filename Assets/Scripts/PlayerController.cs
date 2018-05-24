@@ -405,8 +405,8 @@ public class PlayerController : MonoBehaviour{
         }
 
         if (other.gameObject.tag == "checkpoint" && !checkpointflag && stage == "stage1" ) {
+            checkpointflag = true;
             ifCheckFlg = true;
-
         } else if (other.gameObject.tag == "checkpoint" && stage == "stage2") {
             checkpointflag = true;
 

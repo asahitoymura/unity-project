@@ -857,7 +857,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 1, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &101531771
 MeshFilter:
@@ -1191,12 +1191,82 @@ Prefab:
     - target: {fileID: 224502898102017410, guid: 7787982929685e84ca30261e4ab0529c,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 21.6
+      value: 21.599998
       objectReference: {fileID: 0}
     - target: {fileID: 224502898102017410, guid: 7787982929685e84ca30261e4ab0529c,
         type: 2}
       propertyPath: m_SizeDelta.x
       value: -143.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 224119096246555394, guid: 7787982929685e84ca30261e4ab0529c,
+        type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224119096246555394, guid: 7787982929685e84ca30261e4ab0529c,
+        type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224119096246555394, guid: 7787982929685e84ca30261e4ab0529c,
+        type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224119096246555394, guid: 7787982929685e84ca30261e4ab0529c,
+        type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224119096246555394, guid: 7787982929685e84ca30261e4ab0529c,
+        type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224119096246555394, guid: 7787982929685e84ca30261e4ab0529c,
+        type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224119096246555394, guid: 7787982929685e84ca30261e4ab0529c,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224119096246555394, guid: 7787982929685e84ca30261e4ab0529c,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224119096246555394, guid: 7787982929685e84ca30261e4ab0529c,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224119096246555394, guid: 7787982929685e84ca30261e4ab0529c,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224119096246555394, guid: 7787982929685e84ca30261e4ab0529c,
+        type: 2}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224119096246555394, guid: 7787982929685e84ca30261e4ab0529c,
+        type: 2}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224472966280995506, guid: 7787982929685e84ca30261e4ab0529c,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 66
+      objectReference: {fileID: 0}
+    - target: {fileID: 224472966280995506, guid: 7787982929685e84ca30261e4ab0529c,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -47
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7787982929685e84ca30261e4ab0529c, type: 2}
@@ -4805,7 +4875,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 1.000001
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -5140,7 +5210,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4472060770605072, guid: 2704dced176602142b81d458862e5e5d, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -3
+      value: -1.17
       objectReference: {fileID: 0}
     - target: {fileID: 4472060770605072, guid: 2704dced176602142b81d458862e5e5d, type: 2}
       propertyPath: m_LocalRotation.x
