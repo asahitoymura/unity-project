@@ -738,6 +738,7 @@ GameObject:
   - component: {fileID: 982645511}
   - component: {fileID: 982645510}
   - component: {fileID: 982645509}
+  - component: {fileID: 982645512}
   m_Layer: 5
   m_Name: end
   m_TagString: Untagged
@@ -803,18 +804,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1558816823}
-        m_MethodName: pushResultButton2
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 923725392}
+      - m_Target: {fileID: 982645512}
         m_MethodName: endPush
         m_Mode: 1
         m_Arguments:
@@ -860,6 +850,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 982645507}
+--- !u!114 &982645512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 982645507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f051103bcacc12c4cafdc94f79c45c92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextscenename: 
+  backscenename: 
 --- !u!1 &1184258985
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,7 +1033,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4785836218384026, guid: 82814f825892e734e840fdfe336ee1df, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1945506760477682, guid: 82814f825892e734e840fdfe336ee1df, type: 2}
       propertyPath: m_IsActive
@@ -1153,34 +1156,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1902250112}
---- !u!1 &1941573505
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 976464487}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1941573506}
-  m_Layer: 0
-  m_Name: Missing Prefab
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1941573506
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 976464487}
-  m_GameObject: {fileID: 1941573505}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2014298554
 Prefab:
   m_ObjectHideFlags: 0

@@ -16,8 +16,8 @@ public class SubmitButton : MonoBehaviour {
     private string[] textdata;
     private string[] num;
     private int i = 0;
+    public GameObject startbutton;
     private string scenename;
-    private GameObject startbutton;
 
     // Use this for initialization
     void Start(){
@@ -40,11 +40,14 @@ public class SubmitButton : MonoBehaviour {
         string selectedLabel = toggleGroup.ActiveToggles()
             .First().GetComponentsInChildren<Text>()
             .First(t => t.name == "Label").text;
+
         Debug.Log("selected " + selectedLabel);
         name = InputManager.getInputValue();
+
         string gaku = toggleGroup2.ActiveToggles()
             .First().GetComponentsInChildren<Text>()
             .First(t => t.name == "Label").text;
+        
         StreamWriter streamWriter;
         FileInfo fileInfo;
         fileInfo = new FileInfo(Application.dataPath + "/" + filepathname+"/" + name + ".csv");
