@@ -36,11 +36,11 @@ public class Result : MonoBehaviour{
         retry = GameObject.Find("Canvas/retry");
         retry.SetActive(false);
         next = GameObject.Find("Canvas/next");
+        stagename = SceneManager.GetActiveScene().name;
         if(stagename == "stage1Result" || stagename == "stage2Result"){
             next.SetActive(false);
         }
         end = GameObject.Find("end");
-        stagename = SceneManager.GetActiveScene().name;
         if(stagename == "stage3Result"){
             end.SetActive(false);
         }
@@ -65,7 +65,9 @@ public class Result : MonoBehaviour{
                 Instantiate(prefab, postion, rotation: Quaternion.identity);
                 GameObject yazirusi = (GameObject)Resources.Load("sita");
                 Vector3 yazipos = new Vector3(-8.6f + posX, 4.5f - 1.0f - posY, 0);
-                Instantiate(yazirusi, yazipos, Quaternion.identity);
+                if(i < comlist.Count-1){
+                    Instantiate(yazirusi, yazipos, Quaternion.identity);
+                }
                 posY += 1.0f + 1.0f;
                 x++;
                 if(x >= 5){
@@ -80,7 +82,9 @@ public class Result : MonoBehaviour{
                 Instantiate(prefab, postion, rotation: Quaternion.identity);
                 GameObject yazirusi = (GameObject)Resources.Load("sita");
                 Vector3 yazipos = new Vector3(-8.6f + posX, 4.5f - 1.0f - posY, 0);
-                Instantiate(yazirusi, yazipos, Quaternion.identity);
+                if(i < comlist.Count-1){
+                    Instantiate(yazirusi, yazipos, Quaternion.identity);
+                }
                 posY += 1.0f + 1.0f;
                 x++;
                 if (x >= 5){
@@ -95,7 +99,9 @@ public class Result : MonoBehaviour{
                 Instantiate(prefab, postion, rotation: Quaternion.identity);
                 GameObject yazirusi = (GameObject)Resources.Load("sita");
                 Vector3 yazipos = new Vector3(-8.6f + posX, 4.5f - 1.0f - posY, 0);
-                Instantiate(yazirusi, yazipos, Quaternion.identity);
+                if(i < comlist.Count-1){
+                    Instantiate(yazirusi, yazipos, Quaternion.identity);
+                }
                 posY += 1.0f + 1.0f;
                 x++;
                 if (x >= 5){
@@ -110,7 +116,9 @@ public class Result : MonoBehaviour{
                 Instantiate(prefab, postion, rotation: Quaternion.identity);
                 GameObject yazirusi = (GameObject)Resources.Load("sita");
                 Vector3 yazipos = new Vector3(-8.6f + posX, 4.5f - 1.0f - posY, 0);
-                Instantiate(yazirusi, yazipos, Quaternion.identity);
+                if(i < comlist.Count-1){
+                    Instantiate(yazirusi, yazipos, Quaternion.identity);
+                }
                 posY += 1.0f + 1.0f;
                 x++;
                 if (x >= 5){

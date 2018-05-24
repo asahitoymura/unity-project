@@ -25,4 +25,8 @@ public class SceneChenger : MonoBehaviour {
     public void retryPush(){
         SceneManager.LoadScene(backscenename);
     }
+
+    public void endPush(){
+        Application.Quit();
+    }
 }

@@ -738,7 +738,6 @@ GameObject:
   - component: {fileID: 982645511}
   - component: {fileID: 982645510}
   - component: {fileID: 982645509}
-  - component: {fileID: 982645512}
   m_Layer: 5
   m_Name: next
   m_TagString: Untagged
@@ -804,7 +803,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 982645512}
+      - m_Target: {fileID: 923725392}
         m_MethodName: nextpush
         m_Mode: 1
         m_Arguments:
@@ -850,19 +849,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 982645507}
---- !u!114 &982645512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 982645507}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f051103bcacc12c4cafdc94f79c45c92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextscenename: stage2
-  backscenename: stage1
 --- !u!1 &1079393591
 GameObject:
   m_ObjectHideFlags: 0
