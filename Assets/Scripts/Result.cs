@@ -18,9 +18,9 @@ public class Result : MonoBehaviour{
     private int x = 0;
     private string score;
     private Text Text;
-    private GameObject retry;
-    private GameObject next;
-    private GameObject end;
+    public GameObject retry;
+    public GameObject next;
+    public GameObject end;
     private string stagename;
     panelController panelController;
     PlayerController PlayerController;
@@ -36,12 +36,13 @@ public class Result : MonoBehaviour{
         retry = GameObject.Find("Canvas/retry");
         retry.SetActive(false);
         next = GameObject.Find("Canvas/next");
-        Debug.Log(next);
+        //Debug.Log(next);
+        stagename = SceneManager.GetActiveScene().name;
         if(stagename == "stage1Result" || stagename == "stage2Result"){
-            next.SetActive(false);
+            next.SetActive(!next.activeSelf);
         }
         end = GameObject.Find("end");
-        stagename = SceneManager.GetActiveScene().name;
+        
         if(stagename == "stage3Result"){
             end.SetActive(false);
         }

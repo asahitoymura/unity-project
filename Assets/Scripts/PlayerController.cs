@@ -390,8 +390,8 @@ public class PlayerController : MonoBehaviour{
     void OnTriggerEnter(Collider other){
         if (other.gameObject.tag == "goal"){
             if (checkpointflag){
-                Debug.Log(moveList.Count);
-                Debug.Log(moveObjList.Count);
+                //Debug.Log(moveList.Count);
+                //Debug.Log(moveObjList.Count);
                 /*
                 goal = (GameObject)Resources.Load("clear");
                 Vector3 postion = new Vector3(x: -5.5F, y: 0F, z: -5F);
@@ -407,6 +407,7 @@ public class PlayerController : MonoBehaviour{
         if (other.gameObject.tag == "checkpoint" && !checkpointflag && stage == "stage1" ) {
             checkpointflag = true;
             ifCheckFlg = true;
+            pauseScript.dispCheckPoint();
         } else if (other.gameObject.tag == "checkpoint" && stage == "stage2") {
             checkpointflag = true;
 

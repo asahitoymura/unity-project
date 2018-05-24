@@ -15,6 +15,11 @@ public class CSVWriter2 : MonoBehaviour{
         //input = GameObject.Find("InputField").GetComponent<InputManager>();
         //        Directory.CreateDirectory("C:/Users/atoyomura/p/edupgm2/test_Data/Resources/CSV/0");
         //Directory.CreateDirectory(filepathname);
+        if(Directory.Exists(Application.dataPath + "/" + filepathname)){
+            return;
+        }else{
+            Directory.CreateDirectory(Application.dataPath + "/" + filepathname);
+        }
     }
 
     // Update is called once per frame
