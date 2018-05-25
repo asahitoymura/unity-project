@@ -65,6 +65,7 @@ public class PlayerController : MonoBehaviour{
     private string stage;
     private GameObject goalobj;
     private bool switching;
+    public Sprite sprite;
 
     // Use this for initialization
     void Start(){
@@ -342,7 +343,7 @@ public class PlayerController : MonoBehaviour{
 
     private void Action(){
         if (!checkpointflag){
-            pauseScript.dispCheckPoint();
+            pauseScript.dispCheckPoint(sprite);
             //moveList.Add(GameObject.Find("speak").tag);
             // for(int i = 0; i < moveList.Count; i++){
             //     if(moveList[i] == "ifPanel"){
@@ -407,7 +408,7 @@ public class PlayerController : MonoBehaviour{
         if (other.gameObject.tag == "checkpoint" && !checkpointflag && stage == "stage1" ) {
             checkpointflag = true;
             ifCheckFlg = true;
-            pauseScript.dispCheckPoint();
+            pauseScript.dispCheckPoint(sprite);
         } else if (other.gameObject.tag == "checkpoint" && stage == "stage2") {
             checkpointflag = true;
 

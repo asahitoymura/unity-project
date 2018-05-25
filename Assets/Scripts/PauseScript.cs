@@ -54,7 +54,9 @@ public class PauseScript : MonoBehaviour{
         }
     }
 
-    public void dispCheckPoint(){
+    public void dispCheckPoint(Sprite sprite){
+        GameObject panelObj = pauseUI.transform.Find("Panel").gameObject;
+        panelObj.GetComponent<Image>().sprite = sprite;
         pauseUI.SetActive(!pauseUI.activeSelf);
         playerController.ChangeMoveFlg();
         if (pauseUI.activeSelf){
@@ -79,7 +81,7 @@ public class PauseScript : MonoBehaviour{
     {
         GameObject panelObj = pauseUI.transform.Find("Panel").gameObject;
         panelObj.GetComponent<Image>().sprite = sprite;
-
+        playerController.ChangeMoveFlg();
         pauseUI.SetActive(!pauseUI.activeSelf);
         if (pauseUI.activeSelf){
             Time.timeScale = 0f;

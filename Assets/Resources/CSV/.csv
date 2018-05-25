@@ -462,3 +462,14 @@ moveOn,16
 moveOn,17
 moveOn,18
 stage3,0
+,0
+stage1,0
+stage1,0
+moveOn,1
+moveOn,2
+turnRight,3
+moveOn,4
+moveOn,5
+ifPanel,6
+action,7
+moveOn,8

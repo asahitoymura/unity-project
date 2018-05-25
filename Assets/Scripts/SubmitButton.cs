@@ -25,7 +25,7 @@ public class SubmitButton : MonoBehaviour {
         num = new string[2048];
         scenename = SceneManager.GetActiveScene().name;
         startbutton = GameObject.Find("Canvas/Start");
-        Debug.Log(startbutton);
+        //Debug.Log(startbutton);
         if(scenename == "LoadScene"){
            GameObject.Find("Canvas/Start").SetActive(!startbutton.activeSelf);
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class SceneChenger : MonoBehaviour {
 
@@ -27,6 +28,7 @@ public class SceneChenger : MonoBehaviour {
     }
 
     public void endPush(){
+        //Directory.Move(Application.dataPath + "/Resouces/CSV/","C:/Users/atoyomura/Desktop");
         Application.Quit();
     }
 }
