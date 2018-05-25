@@ -2429,6 +2429,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 716366cc6d6c5da4f90586e33cbe09db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  missionPanel: {fileID: 21300000, guid: a82d9e974e1679e4392003ab52c55b8e, type: 3}
   pauseUI: {fileID: 1720888646}
   Obstacle: {fileID: 1816642514}
   goalUI: {fileID: 2051051859}

@@ -493,6 +493,7 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+  m_TileRefreshArray: []
 --- !u!4 &83434291
 Transform:
   m_ObjectHideFlags: 0
@@ -4852,6 +4853,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 716366cc6d6c5da4f90586e33cbe09db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  missionPanel: {fileID: 21300000, guid: 5c79f7b2aa45f3a40816e2427ca0b04e, type: 3}
   pauseUI: {fileID: 1032457116}
   Obstacle: {fileID: 302758972}
   goalUI: {fileID: 878684611}

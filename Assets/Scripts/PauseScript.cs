@@ -6,6 +6,8 @@ public class PauseScript : MonoBehaviour{
 
     PlayerController playerController;
 
+    public Sprite missionPanel;
+
     //　ポーズした時に表示するUI
     [SerializeField]
     public GameObject pauseUI;
@@ -14,6 +16,7 @@ public class PauseScript : MonoBehaviour{
 
     private void Start(){
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        DispMission(missionPanel);
     }
 
     // Update is called once per frame
@@ -64,7 +67,6 @@ public class PauseScript : MonoBehaviour{
     public void DispGoal(Sprite sprite){
         GameObject panelObj = goalUI.transform.Find("Panel").gameObject;
         panelObj.GetComponent<Image>().sprite = sprite;
-        //playerController.ChangeMoveFlg();
         goalUI.SetActive(!goalUI.activeSelf);
         if (goalUI.activeSelf){
             Time.timeScale = 0f;
@@ -73,15 +75,32 @@ public class PauseScript : MonoBehaviour{
         }
     }
 
-    public void DispShoping(Sprite sprite){
+    public void DispShoping(Sprite sprite)
+    {
         GameObject panelObj = pauseUI.transform.Find("Panel").gameObject;
         panelObj.GetComponent<Image>().sprite = sprite;
-        playerController.ChangeMoveFlg();
 
         pauseUI.SetActive(!pauseUI.activeSelf);
         if (pauseUI.activeSelf){
             Time.timeScale = 0f;
-        } else {
+        }
+        else{
+            Time.timeScale = 1f;
+        }
+    }
+
+    public void DispMission(Sprite sprite)
+    {
+        GameObject panelObj = pauseUI.transform.Find("Panel").gameObject;
+        panelObj.GetComponent<Image>().sprite = sprite;
+
+        pauseUI.SetActive(!pauseUI.activeSelf);
+        if (pauseUI.activeSelf)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
             Time.timeScale = 1f;
         }
     }
