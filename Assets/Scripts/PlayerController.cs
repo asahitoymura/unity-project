@@ -445,7 +445,7 @@ public class PlayerController : MonoBehaviour{
         if (other.gameObject.tag == "dog"){
             //awa.PlayOneShot(awa.clip);
             miss = (GameObject)Resources.Load("dogAtack");
-            Vector3 postion = new Vector3(x: -5.5F, y: 0F, z: -5F);
+            Vector3 postion = new Vector3(x: 0, y: 0F, z: -6F);
             miss = Instantiate(miss, postion, Quaternion.identity);
         }
 
