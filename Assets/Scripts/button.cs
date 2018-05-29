@@ -79,6 +79,9 @@ public class button : MonoBehaviour{
                     tmpList.Remove(transform.gameObject);
                 }
             }
+            GameObject tmpObj = transform.parent.gameObject;
+            // 繰り返しパネル、条件パネルのサイズ変更処理
+            tmpObj.GetComponent<TransformPanel>().TransfaPanelUp(transform.localScale.y);
             transform.parent = null;
         }
 
@@ -128,7 +131,8 @@ public class button : MonoBehaviour{
                 transform.parent = hitObj.transform;
                 hitObj.GetComponent<button>().AddWhilePanel(transform.gameObject);
                 panelController.DeletePanelList(transform.gameObject);
-                hitObj.GetComponent<TransformPanel>().TransfaPanel(transform.localScale.y);
+                // 繰り返しパネル、条件パネルのサイズ変更処理 
+                hitObj.GetComponent<TransformPanel>().TransfaPanelDown(transform.localScale.y);
             }
         }
 
